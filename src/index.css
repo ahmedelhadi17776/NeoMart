@@ -1,0 +1,256 @@
+/* FLUX Global Styles - Midnight Luxe Theme */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Gradient Dreams Color Palette */
+  --primary-gradient: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+  --secondary: #F72585;      /* Hot pink - CTAs */
+  --neutral-dark: #1A1A2E;   /* Neutral Dark */
+  --neutral-light: #FAFAFA;  /* Neutral Light */
+  --accent: #00D9FF;         /* Cyan - notifications */
+  --success: #00F5A0;        /* Neon green */
+  --gradient: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
+  --error: #F87171;
+  
+  /* Light Theme (Default) */
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --text-primary: #1A1A2E;
+  --text-secondary: #1A1A2E;
+  --text-muted: #1A1A2E;
+  --border-color: rgba(102, 126, 234, 0.2);
+  --card-bg: #FFFFFF;
+  --navbar-bg: var(--primary-gradient);
+  --navbar-text: #FFFFFF;
+  --shadow: rgba(0, 0, 0, 0.08);
+  --shadow-hover: rgba(0, 0, 0, 0.12);
+  --shadow-strong: rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Theme */
+.dark-theme {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1A1A2E;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #94A3B8;
+  --border-color: rgba(0, 217, 255, 0.2);
+  --card-bg: rgba(26, 26, 46, 0.8);
+  --navbar-bg: rgba(26, 26, 46, 0.9);
+  --navbar-text: #F1F5F9;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 217, 255, 0.2);
+  --shadow-strong: rgba(0, 0, 0, 0.5);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Animated Background */
+.bg-animation {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: var(--bg-primary);
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.bg-animation::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+  opacity: 0.1;
+  top: -300px;
+  right: -300px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.bg-animation::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.08;
+  bottom: -400px;
+  left: -400px;
+  animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+}
+
+/* FLUX Brand Typography */
+.flux-title {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.flux-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.flux-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -1px;
+  animation: gradientShift 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+/* Light theme logo - white text for visibility on gradient background */
+.light-theme .flux-logo {
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark theme logo - gradient text */
+.dark-theme .flux-logo {
+  background: linear-gradient(135deg, #00D9FF 0%, #F72585 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
+}
+
+/* Links */
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary);
+  transform: translateY(-1px);
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glass morphism effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+}
+
+/* Neon glow effect */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+/* Gradient borders */
+.gradient-border {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
+              var(--gradient) border-box;
+}
+
+/* Card Entry Animations */
+.card-entry {
+  animation: cardEntry 0.6s ease-out backwards;
+}
+
+.card-entry:nth-child(1) { animation-delay: 0.1s; }
+.card-entry:nth-child(2) { animation-delay: 0.2s; }
+.card-entry:nth-child(3) { animation-delay: 0.3s; }
+.card-entry:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Pulse Animation */
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Loading Animation */
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(139, 92, 246, 0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
