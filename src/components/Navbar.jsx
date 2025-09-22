@@ -40,6 +40,11 @@ const Navbar = () => {
                 Cart
               </Link>
             </li>
+              <li className="nav-item"> {/* Add By Mohamed */}
+                <Link className="nav-link" to="/wishlist">
+                Wishlist
+                </Link>
+            </li>
           </ul>
 
           {/* Right side - Theme toggle, Cart preview and Auth links */}

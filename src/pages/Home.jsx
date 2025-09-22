@@ -1,30 +1,58 @@
-import React from 'react';
+import { useNavigate } from "react-router-dom";
+import products from "../data/products.json"; 
+import { useState } from "react";
 
-const Home = () => {
-  return (
-    <div className="container mt-4">
+export default function Home() {
+  const navigate = useNavigate();
+  const [wishlist, setWishlist] = useState([]);
+
+  const toggleWishlist = (id) => {
+    setWishlist((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+
+return (
+    <div className="container py-5">
+      <h2 className="mb-4 text-center">🔥 Featured Products</h2>
       <div className="row">
-        <div className="col-12">
-          <h1 className="text-center mb-4 flux-title">Welcome to FLUX</h1>
-          <p className="text-center text-muted flux-subtitle">
-            Experience the future of modern shopping
-          </p>
-          
-          {/* Product grid placeholder */}
-          <div className="row mt-5">
-            <div className="col-12">
-              <div className="card glass-card p-4 card-entry">
-                <h3 className="gradient-text">Products Coming Soon...</h3>
-                <p className="text-muted">
-                  Product listing will be implemented by Shahd
-                </p>
+        {products.slice(0, 4).map((product) => (
+          <div className="col-md-3 mb-4" key={product.id}>
+            <div className="card h-100 shadow-sm">
+              <img
+                src={product.image}
+                alt={product.title}
+                className="card-img-top"
+                style={{ height: "200px", objectFit: "cover" }}
+              />
+              <div className="card-body text-center">
+                <h5 className="card-title">{product.title}</h5>
+                <p className="text-muted">${product.price}</p>
+                <button
+                  className="btn btn-primary w-100 mb-2"
+                  onClick={() => navigate(`/product/${product.id}`)}
+                >
+                  View Details
+                </button>
+                <button
+                  className={`btn w-100 ${
+                    wishlist.includes(product.id)
+                      ? "btn-danger"
+                      : "btn-outline-danger"
+                  }`}
+                  onClick={() => toggleWishlist(product.id)}
+                >
+                  {wishlist.includes(product.id)
+                    ? "❤️ Remove from Wishlist"
+                    : "🤍 Add to Wishlist"}
+                </button>
               </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
-};
+}
 
-export default Home;
