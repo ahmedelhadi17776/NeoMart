@@ -89,7 +89,7 @@ src/
 - **Neon Glow**: Subtle glow effects on interactive elements
 - **Theme Toggle**: Intuitive sun/moon icon toggle in navbar
 
-##  Team Development
+## 👥 Team Development
 
 This project is designed for team collaboration with assigned roles:
 
