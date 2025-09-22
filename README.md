@@ -126,6 +126,7 @@ FLUX represents the future of eCommerce with its:
 - **Responsive Design**: Seamless experience across all devices
 - **Accessibility**: High contrast ratios and focus indicators
 
-## 📄 License
+## 📄 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 This project is part of a team learning exercise for React development, showcasing modern web design trends and best practices.
+
