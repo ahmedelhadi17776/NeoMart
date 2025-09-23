@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Cart3, Person, Sun, Moon } from 'react-bootstrap-icons';
 import { useTheme } from '../contexts/ThemeContext';
-import { useCart } from '../contexts/CartContext'; // ✅ استدعاء الـCartContext
+import { useCart } from '../hooks/useCart';
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { cartCount } = useCart(); // ✅ الحصول على عدد المنتجات في الكارت
+  const { cartCount } = useCart();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark flux-navbar sticky-top">
@@ -42,7 +42,7 @@ const Navbar = () => {
                 Cart
               </Link>
             </li>
-            <li className="nav-item"> {/* Add By Mohamed */}
+            <li className="nav-item">
               <Link className="nav-link" to="/wishlist">
                 Wishlist
               </Link>

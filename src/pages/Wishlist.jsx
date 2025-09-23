@@ -7,14 +7,14 @@ export default function Wishlist() {
     const [wishlist, setWishlist] = useState([]);
 
     useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const saved = JSON.parse(localStorage.getItem("flux-wishlist")) || [];
         setWishlist(saved);
     }, []);
 
     const removeFromWishlist = (id) => {
         const updated = wishlist.filter((item) => item.id !== id);
         setWishlist(updated);
-        localStorage.setItem("wishlist", JSON.stringify(updated));
+        localStorage.setItem("flux-wishlist", JSON.stringify(updated));
     };
 
     if (wishlist.length === 0) {

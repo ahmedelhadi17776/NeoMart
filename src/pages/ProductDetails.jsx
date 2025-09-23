@@ -1,15 +1,16 @@
-// Add By Mohamed 
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import products from "../data/products.json";
-// import "./ProductDetails.css";
+import { useCart } from "../hooks/useCart";
 import "../App.css";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
   const [wishlist, setWishlist] = useState(() => {
-    return JSON.parse(localStorage.getItem("wishlist")) || [];
+    return JSON.parse(localStorage.getItem("flux-wishlist")) || [];
   });
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function ProductDetails() {
       updated = [...wishlist, product];
     }
     setWishlist(updated);
-    localStorage.setItem("wishlist", JSON.stringify(updated));
+    localStorage.setItem("flux-wishlist", JSON.stringify(updated));
   };
 
   const isInWishlist = (product) => {
@@ -50,20 +51,70 @@ export default function ProductDetails() {
 
         {/* Product Details */}
         <div className="col-md-6">
+          <div className="mb-3">
+            <span className="badge bg-secondary mb-2">{product.category}</span>
+            {product.badge && (
+              <span className="badge bg-primary ms-2">{product.badge}</span>
+            )}
+          </div>
+          
           <h1 className="mb-3">{product.title}</h1>
-          <p className="text-muted">{product.category}</p>
-          <p>{product.description}</p>
-          <h3 className="custom-price">${product.price}</h3>
-          <p>
-            <strong>Stock:</strong> {product.stock}
-          </p>
+          
+          <div className="mb-3">
+            <div className="d-flex align-items-center gap-2 mb-2">
+              <div className="rating">
+                {[...Array(5)].map((_, i) => (
+                  <i
+                    key={i}
+                    className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`}
+                    style={{ color: '#ffc107' }}
+                  ></i>
+                ))}
+              </div>
+              <span className="text-muted">({product.reviews} reviews)</span>
+            </div>
+          </div>
+          
+          <p className="mb-4">{product.description}</p>
+          
+          <div className="mb-4">
+            <h2 className="gradient-text mb-2">${product.price}</h2>
+            <p className="text-muted">
+              <strong>Stock:</strong> {product.stock} available
+            </p>
+          </div>
+
+          {/* Quantity Selector */}
+          <div className="mb-3">
+            <label className="form-label">Quantity:</label>
+            <div className="btn-group" role="group">
+              <button
+                className="btn btn-outline-secondary"
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              >
+                −
+              </button>
+              <span className="btn btn-light">{quantity}</span>
+              <button
+                className="btn btn-outline-secondary"
+                onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
+              >
+                +
+              </button>
+            </div>
+          </div>
 
           {/* Buttons */}
           <div className="d-flex gap-3 mt-4">
-            <button className="btn btn-primary ">Add to Cart</button>
+            <button 
+              className="btn btn-primary"
+              onClick={() => addToCart(product, quantity)}
+            >
+              Add to Cart
+            </button>
             <button
-              className={`btn btn-primary ${
-                isInWishlist(product) ? "danger" : "outline-danger"
+              className={`btn ${
+                isInWishlist(product) ? "btn-danger" : "btn-outline-danger"
               }`}
               onClick={() => toggleWishlist(product)}
             >

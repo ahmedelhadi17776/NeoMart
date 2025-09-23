@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
     try {
-      const raw = localStorage.getItem("cart");
+      const raw = localStorage.getItem("flux-cart");
       return raw ? JSON.parse(raw) : [];
-    } catch (e) {
+    } catch {
       return [];
     }
   });
@@ -15,8 +15,10 @@ export function CartProvider({ children }) {
   // حفظ تلقائي في localStorage
   useEffect(() => {
     try {
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-    } catch (e) {}
+      localStorage.setItem("flux-cart", JSON.stringify(cartItems));
+    } catch {
+      // Silently fail if localStorage is not available
+    }
   }, [cartItems]);
 
   // دوال أساسية
@@ -86,8 +88,5 @@ export function CartProvider({ children }) {
   );
 }
 
-export const useCart = () => {
-  const ctx = useContext(CartContext);
-  if (!ctx) throw new Error("useCart must be used inside CartProvider");
-  return ctx;
-};
+// Export the context for use in the hook
+export { CartContext };
