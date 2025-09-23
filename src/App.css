@@ -212,3 +212,9 @@
 .theme-toggle:active {
   transform: scale(0.95);
 }
+
+/* Price */
+.custom-price {
+  color: var(--secondary);
+  font-weight: 600;
+}
