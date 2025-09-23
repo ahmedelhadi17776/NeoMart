@@ -1,8 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { addSampleCartItems, addSampleWishlistItems, clearAllData } from '../utils/sampleData';
 
-const DevHelper = () => {
+const DevHelper = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleToggle = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
+
+  const handleAddSampleCart = useCallback(() => {
+    addSampleCartItems();
+    window.location.reload();
+  }, []);
+
+  const handleAddSampleWishlist = useCallback(() => {
+    addSampleWishlistItems();
+    window.location.reload();
+  }, []);
+
+  const handleClearData = useCallback(() => {
+    clearAllData();
+    window.location.reload();
+  }, []);
 
   if (process.env.NODE_ENV !== 'development') {
     return null;
@@ -21,7 +40,7 @@ const DevHelper = () => {
           height: '50px',
           fontSize: '1.2rem'
         }}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         title="Development Helper"
       >
         🛠️
@@ -44,28 +63,19 @@ const DevHelper = () => {
             <div className="d-grid gap-2">
               <button
                 className="btn btn-primary btn-sm"
-                onClick={() => {
-                  addSampleCartItems();
-                  window.location.reload();
-                }}
+                onClick={handleAddSampleCart}
               >
                 Add Sample Cart Items
               </button>
               <button
                 className="btn btn-outline-primary btn-sm"
-                onClick={() => {
-                  addSampleWishlistItems();
-                  window.location.reload();
-                }}
+                onClick={handleAddSampleWishlist}
               >
                 Add Sample Wishlist
               </button>
               <button
                 className="btn btn-outline-danger btn-sm"
-                onClick={() => {
-                  clearAllData();
-                  window.location.reload();
-                }}
+                onClick={handleClearData}
               >
                 Clear All Data
               </button>
@@ -75,6 +85,8 @@ const DevHelper = () => {
       )}
     </div>
   );
-};
+});
+
+DevHelper.displayName = 'DevHelper';
 
 export default DevHelper;

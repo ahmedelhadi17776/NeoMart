@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useCallback, useMemo } from "react";
 
 const CartContext = createContext(null);
 
@@ -12,17 +12,21 @@ export function CartProvider({ children }) {
     }
   });
 
-  // حفظ تلقائي في localStorage
+  // Auto-save to localStorage with debouncing
   useEffect(() => {
-    try {
-      localStorage.setItem("flux-cart", JSON.stringify(cartItems));
-    } catch {
-      // Silently fail if localStorage is not available
-    }
+    const timeoutId = setTimeout(() => {
+      try {
+        localStorage.setItem("flux-cart", JSON.stringify(cartItems));
+      } catch {
+        // Silently fail if localStorage is not available
+      }
+    }, 100); // Debounce localStorage writes
+
+    return () => clearTimeout(timeoutId);
   }, [cartItems]);
 
-  // دوال أساسية
-  const addToCart = (product, quantity = 1) => {
+  // Core functions with memoization
+  const addToCart = useCallback((product, quantity = 1) => {
     setCartItems(prev => {
       const existing = prev.find(i => i.id === product.id);
       const maxStock = product.stock ?? Infinity;
@@ -46,13 +50,13 @@ export function CartProvider({ children }) {
         ];
       }
     });
-  };
+  }, []);
 
-  const removeFromCart = id => {
+  const removeFromCart = useCallback(id => {
     setCartItems(prev => prev.filter(i => i.id !== id));
-  };
+  }, []);
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = useCallback((id, quantity) => {
     setCartItems(prev =>
       prev.map(i =>
         i.id === id
@@ -63,13 +67,19 @@ export function CartProvider({ children }) {
           : i
       )
     );
-  };
+  }, []);
 
-  const clearCart = () => setCartItems([]);
+  const clearCart = useCallback(() => setCartItems([]), []);
 
-  const cartCount = cartItems.reduce((s, i) => s + i.quantity, 0);
+  const cartCount = useMemo(() => 
+    cartItems.reduce((s, i) => s + i.quantity, 0), 
+    [cartItems]
+  );
 
-  const cartTotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0);
+  const cartTotal = useMemo(() => 
+    cartItems.reduce((s, i) => s + i.price * i.quantity, 0), 
+    [cartItems]
+  );
 
   return (
     <CartContext.Provider

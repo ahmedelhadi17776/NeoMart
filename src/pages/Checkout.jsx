@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, memo } from "react";
 import { useCart } from "../hooks/useCart";
 import { useNavigate } from "react-router-dom";
 
-function validCardNumber(num) {
+// Validation functions moved outside component for better performance
+const validCardNumber = (num) => {
   const digits = num.replace(/\s+/g, "");
   return /^\d{16}$/.test(digits);
-}
-function validCVV(cvv) {
+};
+
+const validCVV = (cvv) => {
   return /^\d{3}$/.test(cvv);
-}
-function validExpiry(mmYY) {
+};
+
+const validExpiry = (mmYY) => {
   const parts = mmYY.split("/");
   if (parts.length !== 2) return false;
   const month = parseInt(parts[0], 10);
@@ -21,9 +24,9 @@ function validExpiry(mmYY) {
   const exp = new Date(year, month, 1);
   const now = new Date();
   return exp > now;
-}
+};
 
-export default function Checkout() {
+const Checkout = memo(() => {
   const { cartTotal, clearCart } = useCart();
   const navigate = useNavigate();
 
@@ -36,7 +39,7 @@ export default function Checkout() {
   });
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = e => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
     const eObj = {};
     if (!form.name.trim()) eObj.name = "Please enter your name";
@@ -53,7 +56,7 @@ export default function Checkout() {
       clearCart();
       navigate("/thankyou", { state: { orderId, total: cartTotal } });
     }
-  };
+  }, [form, clearCart, navigate, cartTotal]);
 
   return (
     <div className="container py-4">
@@ -179,4 +182,8 @@ export default function Checkout() {
       </div>
     </div>
   );
-}
+});
+
+Checkout.displayName = 'Checkout';
+
+export default Checkout;

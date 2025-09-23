@@ -1,11 +1,24 @@
-import React from "react";
+import React, { memo, useCallback, useMemo } from "react";
 import { useCart } from "../hooks/useCart";
 import CartItem from "../components/CartItem";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function CartPage() {
+const CartPage = memo(() => {
   const { cartItems, cartTotal, cartCount, clearCart } = useCart();
   const navigate = useNavigate();
+
+  const handleClearCart = useCallback(() => {
+    clearCart();
+  }, [clearCart]);
+
+  const handleCheckout = useCallback(() => {
+    navigate("/checkout");
+  }, [navigate]);
+
+  const itemCountText = useMemo(() => 
+    `${cartCount} ${cartCount === 1 ? 'item' : 'items'}`, 
+    [cartCount]
+  );
 
   if (cartItems.length === 0) {
     return (
@@ -47,11 +60,11 @@ export default function CartPage() {
         <h2 className="gradient-text mb-0">Shopping Cart</h2>
         <div className="d-flex align-items-center gap-3">
           <span className="badge bg-primary fs-6 px-3 py-2">
-            {cartCount} {cartCount === 1 ? 'item' : 'items'}
+            {itemCountText}
           </span>
           <button
             className="btn btn-outline-danger btn-sm"
-            onClick={() => clearCart()}
+            onClick={handleClearCart}
           >
             <i className="bi bi-trash me-1"></i>
             Clear All
@@ -100,7 +113,7 @@ export default function CartPage() {
             <div className="d-grid gap-2 mt-4">
               <button
                 className="btn btn-primary btn-lg"
-                onClick={() => navigate("/checkout")}
+                onClick={handleCheckout}
               >
                 <i className="bi bi-credit-card me-2"></i>
                 Proceed to Checkout
@@ -122,4 +135,8 @@ export default function CartPage() {
       </div>
     </div>
   );
-}
+});
+
+CartPage.displayName = 'CartPage';
+
+export default CartPage;

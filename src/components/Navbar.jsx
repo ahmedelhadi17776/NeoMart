@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Cart3, Person, Sun, Moon } from 'react-bootstrap-icons';
 import { useTheme } from '../contexts/ThemeContext';
 import { useCart } from '../hooks/useCart';
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const { isDarkMode, toggleTheme } = useTheme();
   const { cartCount } = useCart();
+
+  const handleThemeToggle = useCallback(() => {
+    toggleTheme();
+  }, [toggleTheme]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark flux-navbar sticky-top">
@@ -55,7 +59,7 @@ const Navbar = () => {
             <li className="nav-item">
               <button 
                 className="nav-link btn btn-link theme-toggle" 
-                onClick={toggleTheme}
+                onClick={handleThemeToggle}
                 aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
                 style={{
                   border: 'none',
@@ -108,6 +112,8 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;

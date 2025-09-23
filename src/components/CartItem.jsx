@@ -1,8 +1,20 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { useCart } from "../hooks/useCart";
 
-export default function CartItem({ item }) {
+const CartItem = memo(({ item }) => {
   const { updateQuantity, removeFromCart } = useCart();
+
+  const handleDecreaseQuantity = useCallback(() => {
+    updateQuantity(item.id, item.quantity - 1);
+  }, [updateQuantity, item.id, item.quantity]);
+
+  const handleIncreaseQuantity = useCallback(() => {
+    updateQuantity(item.id, item.quantity + 1);
+  }, [updateQuantity, item.id, item.quantity]);
+
+  const handleRemove = useCallback(() => {
+    removeFromCart(item.id);
+  }, [removeFromCart, item.id]);
 
   return (
     <div className="cart-item-card mb-3 card-entry">
@@ -36,7 +48,7 @@ export default function CartItem({ item }) {
             <div className="btn-group" role="group">
               <button
                 className="btn btn-outline-secondary btn-sm"
-                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                onClick={handleDecreaseQuantity}
                 disabled={item.quantity <= 1}
               >
                 <i className="bi bi-dash"></i>
@@ -54,7 +66,7 @@ export default function CartItem({ item }) {
               </span>
               <button
                 className="btn btn-outline-secondary btn-sm"
-                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                onClick={handleIncreaseQuantity}
                 disabled={item.quantity >= (item.stock || Infinity)}
               >
                 <i className="bi bi-plus"></i>
@@ -64,7 +76,7 @@ export default function CartItem({ item }) {
           
           <button
             className="btn btn-outline-danger btn-sm"
-            onClick={() => removeFromCart(item.id)}
+            onClick={handleRemove}
             title="Remove from cart"
           >
             <i className="bi bi-trash me-1"></i>
@@ -74,4 +86,8 @@ export default function CartItem({ item }) {
       </div>
     </div>
   );
-}
+});
+
+CartItem.displayName = 'CartItem';
+
+export default CartItem;
