@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Cart3, Person, Sun, Moon } from 'react-bootstrap-icons';
 import { useTheme } from '../contexts/ThemeContext';
+import { useCart } from '../contexts/CartContext'; // ✅ استدعاء الـCartContext
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
+  const { cartCount } = useCart(); // ✅ الحصول على عدد المنتجات في الكارت
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark flux-navbar sticky-top">
@@ -40,10 +42,10 @@ const Navbar = () => {
                 Cart
               </Link>
             </li>
-              <li className="nav-item"> {/* Add By Mohamed */}
-                <Link className="nav-link" to="/wishlist">
+            <li className="nav-item"> {/* Add By Mohamed */}
+              <Link className="nav-link" to="/wishlist">
                 Wishlist
-                </Link>
+              </Link>
             </li>
           </ul>
 
@@ -72,15 +74,20 @@ const Navbar = () => {
             <li className="nav-item">
               <Link className="nav-link position-relative" to="/cart">
                 <Cart3 size={20} />
-                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill pulse" style={{
-                  background: 'var(--secondary)',
-                  color: 'white',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  padding: '0.125rem 0.375rem'
-                }}>
-                  0
-                </span>
+                {cartCount > 0 && ( // ✅ يظهر البادج فقط لو في عناصر
+                  <span 
+                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill pulse" 
+                    style={{
+                      background: 'var(--secondary)',
+                      color: 'white',
+                      fontSize: '0.75rem',
+                      fontWeight: '700',
+                      padding: '0.125rem 0.375rem'
+                    }}
+                  >
+                    {cartCount}
+                  </span>
+                )}
               </Link>
             </li>
 
