@@ -213,66 +213,8 @@
   transform: scale(0.95);
 }
 
-
-/* ============================= */
-/* Wishlist & ProductDetails CSS */
-/* ============================= */
-
 /* Price */
 .custom-price {
   color: var(--secondary);
   font-weight: 600;
-}
-
-/* Buttons */
-.btn-custom {
-  padding: 8px 16px;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: 0.3s;
-  text-decoration: none; 
-  display: inline-block;
-}
-
-/* Success (Add to Cart) */
-.btn-custom.success {
-  background: var(--success);
-  color: #fff;
-  border-color: var(--success);
-}
-.btn-custom.success:hover {
-  opacity: 0.9;
-}
-
-/* Danger (Remove from Wishlist) */
-.btn-custom.danger {
-  background: var(--secondary);
-  color: #fff;
-  border-color: var(--secondary);
-}
-.btn-custom.danger:hover {
-  opacity: 0.9;
-}
-
-/* Outline Danger (Add to Wishlist) */
-.btn-custom.outline-danger {
-  background: transparent;
-  color: var(--secondary);
-  border-color: var(--secondary);
-}
-.btn-custom.outline-danger:hover {
-  background: var(--secondary);
-  color: #fff;
-}
-
-/* Primary (View Details) */
-.btn-custom.primary {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-.btn-custom.primary:hover {
-  opacity: 0.9;
 }

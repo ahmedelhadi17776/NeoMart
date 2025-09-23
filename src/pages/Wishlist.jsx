@@ -44,11 +44,11 @@ export default function Wishlist() {
                     <h5 className="card-title">{product.title}</h5>
                     <p className="custom-price">${product.price}</p>
                     <div className="d-flex justify-content-between">
-                    <Link to={`/product/${product.id}`} className="btn-custom primary">
+                    <Link to={`/product/${product.id}`} className="btn btn-primary">
                         View Details
                     </Link>
                     <button
-                        className="btn-custom danger"
+                        className="btn btn-primary"
                         onClick={() => removeFromWishlist(product.id)}
                     >
                         Remove ❌

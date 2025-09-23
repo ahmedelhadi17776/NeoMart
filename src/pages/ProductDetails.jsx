@@ -60,9 +60,9 @@ export default function ProductDetails() {
 
           {/* Buttons */}
           <div className="d-flex gap-3 mt-4">
-            <button className="btn-custom success">Add to Cart 🛒</button>
+            <button className="btn btn-primary ">Add to Cart</button>
             <button
-              className={`btn-custom ${
+              className={`btn btn-primary ${
                 isInWishlist(product) ? "danger" : "outline-danger"
               }`}
               onClick={() => toggleWishlist(product)}
