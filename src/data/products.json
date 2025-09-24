@@ -3,54 +3,144 @@
     "id": 1,
     "title": "React Pro T-Shirt",
     "price": 24.99,
-    "description": "A comfortable and stylish t-shirt for every React developer. Made from 100% pure cotton.",
+    "description": "A comfortable and stylish t-shirt for every React developer. Made from 100% pure cotton with premium quality printing.",
     "category": "Apparel",
     "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop",
-    "stock": 15
+    "stock": 15,
+    "rating": 4.8,
+    "reviews": 124,
+    "badge": "Bestseller"
   },
   {
     "id": 2,
     "title": "JavaScript Mug",
     "price": 12.50,
-    "description": "Start your day with a dose of JavaScript. This ceramic mug is microwave and dishwasher safe.",
+    "description": "Start your day with a dose of JavaScript. This ceramic mug is microwave and dishwasher safe with fade-resistant printing.",
     "category": "Accessories",
     "image": "https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=400&h=400&fit=crop",
-    "stock": 30
+    "stock": 30,
+    "rating": 4.6,
+    "reviews": 89,
+    "badge": "Popular"
   },
   {
     "id": 3,
-    "title": "CSS Ninja Sticker",
+    "title": "CSS Ninja Sticker Pack",
     "price": 4.99,
-    "description": "A high-quality vinyl sticker for your laptop. Show off your CSS skills.",
+    "description": "A high-quality vinyl sticker pack for your laptop. Show off your CSS skills with these premium stickers.",
     "category": "Accessories",
     "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=400&fit=crop",
-    "stock": 50
+    "stock": 50,
+    "rating": 4.9,
+    "reviews": 203,
+    "badge": "New"
   },
   {
     "id": 4,
     "title": "Node.js Hoodie",
     "price": 45.00,
-    "description": "Stay warm while coding with this premium Node.js hoodie. Perfect for late-night coding sessions.",
+    "description": "Stay warm while coding with this premium Node.js hoodie. Perfect for late-night coding sessions with soft fleece lining.",
     "category": "Apparel",
     "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=400&fit=crop",
-    "stock": 8
+    "stock": 8,
+    "rating": 4.7,
+    "reviews": 67,
+    "badge": "Limited"
   },
   {
     "id": 5,
-    "title": "Python Notebook",
+    "title": "Python Developer Notebook",
     "price": 18.75,
-    "description": "A beautiful notebook for Python developers. Includes syntax highlighting examples and coding tips.",
+    "description": "A beautiful notebook for Python developers. Includes syntax highlighting examples, coding tips, and dotted grid pages.",
     "category": "Accessories",
     "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=400&fit=crop",
-    "stock": 25
+    "stock": 25,
+    "rating": 4.5,
+    "reviews": 156,
+    "badge": "Educational"
   },
   {
     "id": 6,
     "title": "Vue.js Cap",
     "price": 22.99,
-    "description": "Show your Vue.js pride with this stylish cap. Adjustable fit and breathable material.",
+    "description": "Show your Vue.js pride with this stylish cap. Adjustable fit and breathable material with embroidered logo.",
     "category": "Apparel",
     "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop",
-    "stock": 12
+    "stock": 12,
+    "rating": 4.4,
+    "reviews": 78,
+    "badge": "Trending"
+  },
+  {
+    "id": 7,
+    "title": "TypeScript Keyboard",
+    "price": 89.99,
+    "description": "Mechanical keyboard designed for TypeScript developers. Cherry MX switches with custom keycaps and RGB lighting.",
+    "category": "Electronics",
+    "image": "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=400&h=400&fit=crop",
+    "stock": 5,
+    "rating": 4.9,
+    "reviews": 234,
+    "badge": "Premium"
+  },
+  {
+    "id": 8,
+    "title": "Angular Mouse Pad",
+    "price": 15.99,
+    "description": "Large gaming mouse pad with Angular logo. Smooth surface for precise mouse movements and durable construction.",
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=400&fit=crop",
+    "stock": 40,
+    "rating": 4.3,
+    "reviews": 92,
+    "badge": "Essential"
+  },
+  {
+    "id": 9,
+    "title": "Webpack Backpack",
+    "price": 65.00,
+    "description": "Spacious laptop backpack for developers. Multiple compartments, USB charging port, and water-resistant material.",
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop",
+    "stock": 18,
+    "rating": 4.6,
+    "reviews": 145,
+    "badge": "Professional"
+  },
+  {
+    "id": 10,
+    "title": "GraphQL Water Bottle",
+    "price": 19.99,
+    "description": "Insulated stainless steel water bottle with GraphQL logo. Keeps drinks cold for 24 hours or hot for 12 hours.",
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=400&fit=crop",
+    "stock": 35,
+    "rating": 4.7,
+    "reviews": 167,
+    "badge": "Eco-Friendly"
+  },
+  {
+    "id": 11,
+    "title": "Docker Desktop Stand",
+    "price": 35.50,
+    "description": "Adjustable laptop stand with Docker branding. Ergonomic design reduces neck strain and improves posture.",
+    "category": "Accessories",
+    "image": "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=400&fit=crop",
+    "stock": 22,
+    "rating": 4.8,
+    "reviews": 98,
+    "badge": "Ergonomic"
+  },
+  {
+    "id": 12,
+    "title": "Next.js Wireless Headphones",
+    "price": 129.99,
+    "description": "Premium wireless headphones with Next.js branding. Active noise cancellation and 30-hour battery life.",
+    "category": "Electronics",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop",
+    "stock": 7,
+    "rating": 4.9,
+    "reviews": 189,
+    "badge": "High-End"
   }
 ]

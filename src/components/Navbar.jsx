@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Cart3, Person, Sun, Moon } from 'react-bootstrap-icons';
+import { Cart3, Person, Sun, Moon, Heart } from 'react-bootstrap-icons';
 import { useTheme } from '../contexts/ThemeContext';
-import { useCart } from '../contexts/CartContext'; // ✅ استدعاء الـCartContext
+import { useCart } from '../hooks/useCart';
+import { useWishlist } from '../contexts/WishlistContext';
 
-const Navbar = () => {
+const Navbar = memo(() => {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { cartCount } = useCart(); // ✅ الحصول على عدد المنتجات في الكارت
+  const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
+
+  const handleThemeToggle = useCallback(() => {
+    toggleTheme();
+  }, [toggleTheme]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark flux-navbar sticky-top">
@@ -42,9 +48,23 @@ const Navbar = () => {
                 Cart
               </Link>
             </li>
-            <li className="nav-item"> {/* Add By Mohamed */}
-              <Link className="nav-link" to="/wishlist">
-                Wishlist
+            <li className="nav-item">
+              <Link className="nav-link position-relative" to="/wishlist">
+                <Heart size={20} />
+                {wishlistCount > 0 && (
+                  <span 
+                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill pulse" 
+                    style={{
+                      background: 'var(--secondary)',
+                      color: 'white',
+                      fontSize: '0.75rem',
+                      fontWeight: '700',
+                      padding: '0.125rem 0.375rem'
+                    }}
+                  >
+                    {wishlistCount}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>
@@ -55,7 +75,7 @@ const Navbar = () => {
             <li className="nav-item">
               <button 
                 className="nav-link btn btn-link theme-toggle" 
-                onClick={toggleTheme}
+                onClick={handleThemeToggle}
                 aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
                 style={{
                   border: 'none',
@@ -108,6 +128,8 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;

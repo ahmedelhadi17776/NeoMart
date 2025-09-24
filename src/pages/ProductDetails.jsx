@@ -1,79 +1,242 @@
-// Add By Mohamed 
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
+import { useParams, Link } from "react-router-dom";
 import products from "../data/products.json";
-// import "./ProductDetails.css";
-import "../App.css";
+import { useCart } from "../hooks/useCart";
+import { useWishlist } from "../contexts/WishlistContext";
 
-export default function ProductDetails() {
+const ProductDetails = memo(() => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [wishlist, setWishlist] = useState(() => {
-    return JSON.parse(localStorage.getItem("wishlist")) || [];
-  });
+  const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
   useEffect(() => {
     const selectedProduct = products.find((p) => p.id === parseInt(id));
-    setProduct(selectedProduct);
+    if (selectedProduct) {
+      setProduct(selectedProduct);
+      setIsLoading(false);
+    }
   }, [id]);
 
-  const toggleWishlist = (product) => {
-    let updated;
-    if (wishlist.some((item) => item.id === product.id)) {
-      // remove
-      updated = wishlist.filter((item) => item.id !== product.id);
-    } else {
-      // add
-      updated = [...wishlist, product];
+  const handleQuantityChange = useCallback((newQuantity) => {
+    if (product) {
+      setQuantity(Math.max(1, Math.min(newQuantity, product.stock)));
     }
-    setWishlist(updated);
-    localStorage.setItem("wishlist", JSON.stringify(updated));
-  };
+  }, [product]);
 
-  const isInWishlist = (product) => {
-    return wishlist.some((item) => item.id === product.id);
-  };
+  const handleAddToCart = useCallback(() => {
+    if (product) {
+      addToCart(product, quantity);
+    }
+  }, [product, quantity, addToCart]);
 
-  if (!product) return <h2 className="text-center mt-5">Product not found</h2>;
+  const handleWishlistToggle = useCallback(() => {
+    if (product) {
+      toggleWishlist(product);
+    }
+  }, [product, toggleWishlist]);
+
+  if (isLoading) {
+    return (
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card glass-card p-5 text-center">
+              <div className="loading mb-3"></div>
+              <h3 className="gradient-text">Loading product details...</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card glass-card p-5 text-center">
+              <i className="bi bi-exclamation-triangle display-1 text-muted mb-3"></i>
+              <h2 className="gradient-text mb-3">Product Not Found</h2>
+              <p className="text-muted mb-4">
+                The product you're looking for doesn't exist or has been removed.
+              </p>
+              <Link to="/" className="btn btn-primary">
+                <i className="bi bi-house me-2"></i>
+                Back to Home
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-5">
-      <div className="row align-items-center">
-        {/* Product Image */}
-        <div className="col-md-6">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="img-fluid rounded shadow"
-          />
+      {/* Breadcrumb */}
+      <nav aria-label="breadcrumb" className="mb-4">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/" className="text-decoration-none">Home</Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to="/" className="text-decoration-none">{product.category}</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {product.title}
+          </li>
+        </ol>
+      </nav>
+
+      <div className="row g-5">
+        {/* Product Images */}
+        <div className="col-lg-6">
+          <div className="product-image-gallery">
+            <div className="main-image-container mb-3">
+              <img
+                src={product.image}
+                alt={product.title}
+                className="img-fluid rounded-3 shadow-lg product-main-image"
+              />
+              {product.badge && (
+                <span className="badge product-badge bg-primary position-absolute top-0 end-0 m-3">
+                  {product.badge}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Product Details */}
-        <div className="col-md-6">
-          <h1 className="mb-3">{product.title}</h1>
-          <p className="text-muted">{product.category}</p>
-          <p>{product.description}</p>
-          <h3 className="custom-price">${product.price}</h3>
-          <p>
-            <strong>Stock:</strong> {product.stock}
-          </p>
+        <div className="col-lg-6">
+          <div className="product-details">
+            {/* Category and Badge */}
+            <div className="mb-3">
+              <span className="badge bg-secondary me-2">{product.category}</span>
+              {product.badge && (
+                <span className="badge bg-primary">{product.badge}</span>
+              )}
+            </div>
+            
+            {/* Title */}
+            <h1 className="product-title mb-3">{product.title}</h1>
+            
+            {/* Rating */}
+            <div className="mb-4">
+              <div className="d-flex align-items-center gap-2 mb-2">
+                <div className="rating">
+                  {[...Array(5)].map((_, i) => (
+                    <i
+                      key={i}
+                      className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`}
+                      style={{ color: '#ffc107' }}
+                    ></i>
+                  ))}
+                </div>
+                <span className="text-muted">({product.reviews} reviews)</span>
+                <span className="badge bg-success ms-2">
+                  {product.rating}/5
+                </span>
+              </div>
+            </div>
+            
+            {/* Description */}
+            <div className="product-description mb-4">
+              <p className="text-muted">{product.description}</p>
+            </div>
+            
+            {/* Price */}
+            <div className="product-price mb-4">
+              <h2 className="gradient-text mb-2">${product.price}</h2>
+              <div className="d-flex align-items-center gap-3">
+                <span className="badge bg-success">
+                  <i className="bi bi-check-circle me-1"></i>
+                  In Stock
+                </span>
+                <span className="text-muted">
+                  <strong>{product.stock}</strong> available
+                </span>
+              </div>
+            </div>
 
-          {/* Buttons */}
-          <div className="d-flex gap-3 mt-4">
-            <button className="btn btn-primary ">Add to Cart</button>
-            <button
-              className={`btn btn-primary ${
-                isInWishlist(product) ? "danger" : "outline-danger"
-              }`}
-              onClick={() => toggleWishlist(product)}
-            >
-              {isInWishlist(product)
-                ? "♥ Remove from Wishlist"
-                : "♡ Add to Wishlist"}
-            </button>
+            {/* Quantity Selector */}
+            <div className="quantity-selector mb-4">
+              <label className="form-label fw-bold">Quantity:</label>
+              <div className="btn-group quantity-controls" role="group">
+                <button
+                  className="btn btn-outline-secondary"
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                  disabled={quantity <= 1}
+                >
+                  <i className="bi bi-dash"></i>
+                </button>
+                <span className="btn btn-light quantity-display">
+                  {quantity}
+                </span>
+                <button
+                  className="btn btn-outline-secondary"
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                  disabled={quantity >= product.stock}
+                >
+                  <i className="bi bi-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="action-buttons mb-4">
+              <div className="d-grid gap-3">
+                <button 
+                  className="btn btn-primary btn-lg"
+                  onClick={handleAddToCart}
+                >
+                  <i className="bi bi-cart-plus me-2"></i>
+                  Add to Cart - ${(product.price * quantity).toFixed(2)}
+                </button>
+                <button
+                  className={`btn btn-lg ${
+                    isInWishlist(product.id) ? "btn-danger" : "btn-outline-danger"
+                  }`}
+                  onClick={handleWishlistToggle}
+                >
+                  <i className={`bi ${isInWishlist(product.id) ? 'bi-heart-fill' : 'bi-heart'} me-2`}></i>
+                  {isInWishlist(product.id)
+                    ? "Remove from Wishlist"
+                    : "Add to Wishlist"}
+                </button>
+              </div>
+            </div>
+
+            {/* Product Features */}
+            <div className="product-features">
+              <div className="row g-3">
+                <div className="col-6">
+                  <div className="feature-item text-center p-3 rounded">
+                    <i className="bi bi-truck display-6 text-primary mb-2"></i>
+                    <h6>Free Shipping</h6>
+                    <small className="text-muted">On orders over $50</small>
+                  </div>
+                </div>
+                <div className="col-6">
+                  <div className="feature-item text-center p-3 rounded">
+                    <i className="bi bi-arrow-clockwise display-6 text-success mb-2"></i>
+                    <h6>Easy Returns</h6>
+                    <small className="text-muted">30-day return policy</small>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+});
+
+ProductDetails.displayName = 'ProductDetails';
+
+export default ProductDetails;
