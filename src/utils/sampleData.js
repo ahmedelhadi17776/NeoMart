@@ -28,6 +28,8 @@ export const addSampleWishlistItems = () => {
     products[2], // CSS Ninja Sticker Pack
     products[4], // Python Developer Notebook
     products[11], // Next.js Wireless Headphones
+    products[6], // TypeScript Keyboard
+    products[9], // Webpack Backpack
   ];
 
   localStorage.setItem('flux-wishlist', JSON.stringify(sampleItems));
