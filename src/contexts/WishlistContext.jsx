@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 const WishlistContext = createContext();
 
@@ -20,25 +20,38 @@ export const WishlistProvider = ({ children }) => {
     }
   });
 
-  // Auto-save to localStorage with debouncing
+  // Use ref for timeout management
+  const timeoutRef = useRef(null);
+
+  // Optimized localStorage saving with better debouncing
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    timeoutRef.current = setTimeout(() => {
       try {
         localStorage.setItem("flux-wishlist", JSON.stringify(wishlist));
       } catch {
         // Silently fail if localStorage is not available
       }
-    }, 100); // Debounce localStorage writes
+    }, 150); // Increased debounce for better performance
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, [wishlist]);
 
   const toggleWishlist = useCallback((product) => {
     setWishlist((prev) => {
-      const exists = prev.find((item) => item.id === product.id);
-      if (exists) {
+      const existingIndex = prev.findIndex((item) => item.id === product.id);
+      if (existingIndex !== -1) {
+        // Remove item
         return prev.filter((item) => item.id !== product.id);
       } else {
+        // Add item
         return [...prev, product];
       }
     });
@@ -52,12 +65,18 @@ export const WishlistProvider = ({ children }) => {
     setWishlist([]);
   }, []);
 
+  // Optimized isInWishlist with early return
   const isInWishlist = useCallback((id) => {
+    if (wishlist.length === 0) return false;
     return wishlist.some((item) => item.id === id);
   }, [wishlist]);
 
-  const wishlistCount = useMemo(() => wishlist.length, [wishlist]);
+  // Optimized wishlistCount with early return
+  const wishlistCount = useMemo(() => {
+    return wishlist.length;
+  }, [wishlist]);
 
+  // Memoize the entire context value to prevent unnecessary re-renders
   const value = useMemo(() => ({
     wishlist,
     toggleWishlist,

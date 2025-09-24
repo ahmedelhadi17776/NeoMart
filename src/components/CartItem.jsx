@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from "react";
 import { useCart } from "../hooks/useCart";
+import LazyImage from "./LazyImage";
 
 const CartItem = memo(({ item }) => {
   const { updateQuantity, removeFromCart } = useCart();
@@ -20,7 +21,7 @@ const CartItem = memo(({ item }) => {
     <div className="cart-item-card mb-3 card-entry">
       <div className="card-body d-flex align-items-center p-4">
         <div className="product-image-container me-3">
-          <img
+          <LazyImage
             src={item.image}
             alt={item.title}
             className="product-image"

@@ -2,6 +2,7 @@ import React, { memo, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useWishlist } from "../contexts/WishlistContext";
 import { useCart } from "../hooks/useCart";
+import LazyImage from "../components/LazyImage";
 
 const Wishlist = memo(() => {
     const { wishlist, removeFromWishlist, clearWishlist, wishlistCount } = useWishlist();
@@ -81,7 +82,7 @@ const Wishlist = memo(() => {
                     <div key={product.id} className="col-lg-4 col-md-6">
                         <div className="card wishlist-card h-100 card-entry" style={{ animationDelay: `${index * 0.1}s` }}>
                             <div className="wishlist-image-container position-relative">
-                                <img
+                                <LazyImage
                                     src={product.image}
                                     alt={product.title}
                                     className="card-img-top wishlist-image"
