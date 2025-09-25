@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useCallback, memo, useRef } from 'react';
+import React, { useState, useEffect, useCallback, memo, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useWishlist } from '../contexts/WishlistContext';
+import products from '../data/products.json';
+import LazyImage from '../components/LazyImage';
 
 const Home = memo(() => {
   const { cartCount } = useCart();
@@ -51,6 +53,12 @@ const Home = memo(() => {
     { number: '24/7', label: 'Support' },
     { number: '5★', label: 'Rating' }
   ];
+  // Featured products (top rated)
+  const featuredProducts = useMemo(() => {
+    return [...products]
+      .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      .slice(0, 4);
+  }, []);
   return (
     <div className="home-page">
       {/* Hero Section */}
@@ -120,6 +128,59 @@ const Home = memo(() => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products */}
+      <section className="py-5">
+        <div className="container">
+          <div className="d-flex align-items-end justify-content-between mb-4">
+            <div>
+              <h2 className="section-title gradient-text mb-1">Featured Products</h2>
+              <p className="section-subtitle text-muted mb-0">Handpicked bestsellers loved by developers</p>
+            </div>
+            <Link to="/products" className="btn btn-outline-primary">
+              View All
+            </Link>
+          </div>
+          <div className="row g-4">
+            {featuredProducts.map((product, index) => (
+              <div key={product.id} className="col-xl-3 col-lg-4 col-md-6">
+                <div className="card product-card h-100 card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
+                  <div className="product-image-container position-relative">
+                    <LazyImage
+                      src={product.image}
+                      alt={product.title}
+                      className="card-img-top product-grid-image"
+                    />
+                    {product.badge && (
+                      <span className="badge product-badge bg-primary position-absolute top-0 end-0 m-2">
+                        {product.badge}
+                      </span>
+                    )}
+                  </div>
+                  <div className="card-body d-flex flex-column">
+                    <div className="d-flex align-items-center justify-content-between mb-2">
+                      <span className="badge bg-secondary small">{product.category}</span>
+                      <div className="rating">
+                        {[...Array(5)].map((_, i) => (
+                          <i key={i} className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`} style={{ color: '#ffc107' }}></i>
+                        ))}
+                      </div>
+                    </div>
+                    <h5 className="card-title mb-1">{product.title}</h5>
+                    <p className="card-text text-muted mb-3" style={{ minHeight: 48 }}>{product.description.slice(0, 80)}{product.description.length > 80 ? '…' : ''}</p>
+                    <div className="d-flex align-items-center justify-content-between">
+                      <span className="gradient-text fw-bold fs-5">${product.price}</span>
+                      <Link to={`/product/${product.id}`} className="btn btn-sm btn-outline-primary">
+                        Details
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

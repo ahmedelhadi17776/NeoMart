@@ -6,6 +6,7 @@ import { CartProvider } from './contexts/CartContext';
 import { WishlistProvider } from './contexts/WishlistContext';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './styles/main.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

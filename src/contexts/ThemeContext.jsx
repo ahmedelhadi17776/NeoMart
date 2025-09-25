@@ -20,15 +20,41 @@ export const ThemeProvider = ({ children }) => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
+  // Apply theme immediately on mount
   useEffect(() => {
-    // Update CSS variables based on theme
-    const root = document.documentElement;
+    const html = document.documentElement;
+    const body = document.body;
+    
+    // Remove all theme classes first
+    html.classList.remove('dark-theme', 'light-theme');
+    body.classList.remove('dark-theme', 'light-theme');
+    
+    // Add the appropriate theme class
     if (isDarkMode) {
-      root.classList.add('dark-theme');
-      root.classList.remove('light-theme');
+      html.classList.add('dark-theme');
+      body.classList.add('dark-theme');
     } else {
-      root.classList.add('light-theme');
-      root.classList.remove('dark-theme');
+      html.classList.add('light-theme');
+      body.classList.add('light-theme');
+    }
+  }, []);
+
+  // Update theme when isDarkMode changes
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    
+    // Remove all theme classes first
+    html.classList.remove('dark-theme', 'light-theme');
+    body.classList.remove('dark-theme', 'light-theme');
+    
+    // Add the appropriate theme class
+    if (isDarkMode) {
+      html.classList.add('dark-theme');
+      body.classList.add('dark-theme');
+    } else {
+      html.classList.add('light-theme');
+      body.classList.add('light-theme');
     }
     
     // Save to localStorage
@@ -37,7 +63,11 @@ export const ThemeProvider = ({ children }) => {
 
   // Memoized toggle function
   const toggleTheme = useCallback(() => {
-    setIsDarkMode(prev => !prev);
+    setIsDarkMode(prev => {
+      const newMode = !prev;
+      console.log('Theme toggled to:', newMode ? 'dark' : 'light');
+      return newMode;
+    });
   }, []);
 
   // Memoize the entire context value
