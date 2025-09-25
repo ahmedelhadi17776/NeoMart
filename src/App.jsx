@@ -18,6 +18,7 @@ const ThankYou = lazy(() => import('./pages/ThankYou'));
 const Login = lazy(() => import('./pages/Login'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Admin = lazy(() => import('./pages/Admin'));
+const Products = lazy(() => import('./pages/Products'));
 
 // Loading component for Suspense fallback
 const PageLoader = () => (
@@ -46,6 +47,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/thankyou" element={<ThankYou />} />

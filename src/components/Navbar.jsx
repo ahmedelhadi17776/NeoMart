@@ -51,6 +51,11 @@ const Navbar = memo(() => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/products">
+                Products
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link position-relative" to="/wishlist">
                 <Heart size={20} />
                 {wishlistCount > 0 && (
