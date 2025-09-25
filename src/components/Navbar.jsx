@@ -4,11 +4,13 @@ import { Cart3, Person, Sun, Moon, Heart } from 'react-bootstrap-icons';
 import { useTheme } from '../contexts/ThemeContext';
 import { useCart } from '../hooks/useCart';
 import { useWishlist } from '../contexts/WishlistContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = memo(() => {
   const { isDarkMode, toggleTheme } = useTheme();
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
+  const { user, isAdmin, isAuthenticated, logout } = useAuth();
 
   const handleThemeToggle = useCallback(() => {
     toggleTheme();
@@ -110,19 +112,42 @@ const Navbar = memo(() => {
                 )}
               </Link>
             </li>
-
-            {/* Login/Signup */}
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                <Person size={20} className="me-1" />
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link btn btn-primary text-white ms-2" to="/signup">
-                Sign Up
-              </Link>
-            </li>
+            {/* User / Auth */}
+            {isAuthenticated ? (
+              <>
+                {isAdmin && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin">Admin</Link>
+                  </li>
+                )}
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'var(--navbar-text)' }}>
+                    <Person size={20} className="me-1" />{user?.name || 'Account'}
+                  </a>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    <li><span className="dropdown-item-text text-muted">{user?.email}</span></li>
+                    <li><hr className="dropdown-divider" /></li>
+                    <li>
+                      <button className="dropdown-item" onClick={logout}>Logout</button>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    <Person size={20} className="me-1" />
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link btn btn-primary text-white ms-2" to="/signup">
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

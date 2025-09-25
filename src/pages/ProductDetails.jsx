@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, memo, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import products from "../data/products.json";
+import { getProductById } from "../utils/productsStore";
 import { useCart } from "../hooks/useCart";
 import { useWishlist } from "../contexts/WishlistContext";
 import LazyImage from "../components/LazyImage";
@@ -30,7 +30,7 @@ const ProductDetails = memo(() => {
         
         if (abortControllerRef.current?.signal.aborted) return;
         
-        const selectedProduct = products.find((p) => p.id === parseInt(id));
+        const selectedProduct = getProductById(parseInt(id));
         if (selectedProduct) {
           setProduct(selectedProduct);
           setIsLoading(false);
