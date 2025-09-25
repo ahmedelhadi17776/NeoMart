@@ -259,3 +259,18 @@ html {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* Auth subtle gradient background for inputs */
+.auth-card .form-control.is-valid {
+  border-color: rgba(0, 245, 160, 0.6) !important;
+}
+
+.auth-card .form-control.is-invalid {
+  border-color: var(--error) !important;
+}
+
+/* Ensure placeholder color across all inputs on auth pages */
+.auth-card ::placeholder {
+  color: var(--text-muted);
+  opacity: 0.85;
+}

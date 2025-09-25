@@ -96,6 +96,117 @@
   transition: left 0.5s ease;
 }
 
+/* Auth Pages */
+.auth-card {
+  overflow: hidden;
+}
+
+.auth-header .auth-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--accent);
+  box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.auth-header .auth-icon i {
+  font-size: 1.5rem;
+}
+
+.auth-input-group {
+  position: relative;
+}
+
+.auth-input-group .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  z-index: 2;
+}
+
+.auth-input-group .form-control {
+  padding-left: 2.25rem;
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.auth-input-group .form-control::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.85;
+}
+
+.auth-input-group .form-control:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 217, 255, 0.15) !important;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+}
+
+.auth-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.oauth-divider {
+  position: relative;
+  text-align: center;
+}
+
+.oauth-divider span {
+  display: inline-block;
+  padding: 0 .75rem;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  border-radius: .5rem;
+}
+
+.oauth-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--border-color);
+  z-index: -1;
+}
+
+.oauth-buttons .oauth-btn {
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: .75rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.oauth-buttons .oauth-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.oauth-buttons .oauth-btn.google {
+  border-color: rgba(234, 67, 53, 0.4);
+}
+
+.oauth-buttons .oauth-btn.github {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Light theme button hover */
 .light-theme .btn-primary:hover {
   transform: translateY(-2px);
