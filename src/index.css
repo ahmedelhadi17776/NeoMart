@@ -14,8 +14,13 @@
   --success: #00F5A0;        /* Neon green */
   --gradient: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
   --error: #F87171;
-  
-  /* Light Theme (Default) */
+}
+
+/* Light Theme (Default) */
+:root,
+.light-theme,
+html.light-theme,
+body.light-theme {
   --bg-primary: #FAFAFA;
   --bg-secondary: #FFFFFF;
   --text-primary: #1A1A2E;
@@ -31,7 +36,9 @@
 }
 
 /* Dark Theme */
-.dark-theme {
+.dark-theme,
+html.dark-theme,
+body.dark-theme {
   --bg-primary: #0F172A;
   --bg-secondary: #1A1A2E;
   --text-primary: #F1F5F9;
@@ -55,6 +62,17 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure body gets theme class */
+body.light-theme {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body.dark-theme {
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* Optimized Animated Background */
@@ -151,17 +169,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Light theme logo - white text for visibility on gradient background */
-.light-theme .flux-logo {
-  color: white;
+.light-theme .flux-logo,
+.light-theme .flux-logo:hover {
+  color: white !important;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background: none !important;
 }
 
 /* Dark theme logo - gradient text */
-.dark-theme .flux-logo {
-  background: linear-gradient(135deg, #00D9FF 0%, #F72585 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.dark-theme .flux-logo,
+.dark-theme .flux-logo:hover {
+  background: linear-gradient(135deg, #00D9FF 0%, #F72585 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: none !important;
 }
 
 @keyframes gradientShift {
@@ -261,6 +284,15 @@ html {
 }
 
 /* Auth subtle gradient background for inputs */
+.floating {
+  animation: float 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+}
 .auth-card .form-control.is-valid {
   border-color: rgba(0, 245, 160, 0.6) !important;
 }

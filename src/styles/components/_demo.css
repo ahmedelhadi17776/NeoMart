@@ -1,0 +1,168 @@
+/* Demo Section Styles */
+.demo-section {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(139, 92, 246, 0.05) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-content {
+  padding: 2rem 0;
+}
+
+.demo-features {
+  margin: 2rem 0;
+}
+
+.demo-feature {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.demo-feature i {
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.demo-actions {
+  margin-top: 2rem;
+}
+
+.demo-visual {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.demo-cards {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.demo-card {
+  position: absolute;
+  width: 200px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px var(--shadow);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.demo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.demo-card.card-1 {
+  top: 20%;
+  left: 10%;
+  z-index: 2;
+  animation: demoFloat1 8s ease-in-out infinite;
+}
+
+.demo-card.card-2 {
+  bottom: 20%;
+  right: 15%;
+  z-index: 1;
+  animation: demoFloat2 10s ease-in-out infinite;
+}
+
+.demo-card .card-header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.demo-card .card-header i {
+  font-size: 1.25rem;
+}
+
+.demo-card .card-body {
+  padding: 1rem;
+  background: var(--card-bg);
+}
+
+.demo-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.demo-item:last-child {
+  border-bottom: none;
+}
+
+.demo-item .item-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* Demo Card Animations */
+@keyframes demoFloat1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+@keyframes demoFloat2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-1deg);
+  }
+}
+
+/* Mobile Demo */
+@media (max-width: 768px) {
+  .demo-cards {
+    height: 300px;
+  }
+
+  .demo-card {
+    width: 160px;
+  }
+
+  .demo-card.card-1 {
+    top: 10%;
+    left: 5%;
+  }
+
+  .demo-card.card-2 {
+    bottom: 10%;
+    right: 5%;
+  }
+
+  .demo-card .card-header {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .demo-card .card-body {
+    padding: 0.75rem;
+  }
+
+  .demo-feature {
+    font-size: 0.9rem;
+  }
+}

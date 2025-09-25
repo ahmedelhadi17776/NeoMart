@@ -1,0 +1,12 @@
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.theme-toggle { position: relative; overflow: hidden; }
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.2) !important; transform: scale(1.1); }
+.theme-toggle:active { transform: scale(0.95); }
+
