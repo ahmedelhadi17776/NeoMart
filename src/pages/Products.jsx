@@ -1,9 +1,10 @@
-import React, { useMemo, useState, useCallback, memo } from 'react';
+import React, { useMemo, useState, useCallback, memo, useRef } from 'react';
 import products from '../data/products.json';
 import { Link } from 'react-router-dom';
 import LazyImage from '../components/LazyImage';
 import { useCart } from '../hooks/useCart';
 import { useWishlist } from '../contexts/WishlistContext';
+import { useMicroInteractions, useWishlistAnimation, useButtonLoading } from '../hooks/useMicroInteractions';
 
 const categoryList = Array.from(new Set(products.map(p => p.category)));
 
@@ -20,6 +21,14 @@ const Products = memo(() => {
   const [sortBy, setSortBy] = useState('featured');
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  
+  // Micro-interaction hooks
+  const { createFlyToCartAnimation } = useMicroInteractions();
+  const { triggerHeartAnimation, isHeartActive } = useWishlistAnimation();
+  const { setButtonLoading, isButtonLoading } = useButtonLoading();
+  
+  // Refs for cart animation target
+  const cartIconRef = useRef(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -43,13 +52,53 @@ const Products = memo(() => {
     return list;
   }, [query, category, sortBy]);
 
-  const handleAddToCart = useCallback((product) => {
-    addToCart(product, 1);
-  }, [addToCart]);
+  const handleAddToCart = useCallback(async (product, event) => {
+    const buttonId = `add-to-cart-${product.id}`;
+    const buttonElement = event.currentTarget;
+    
+    try {
+      setButtonLoading(buttonId, true);
+      
+      // Add to cart
+      addToCart(product, 1);
+      
+      // Trigger button animation
+      buttonElement.classList.add('adding');
+      
+      // Create fly to cart animation
+      if (cartIconRef.current) {
+        createFlyToCartAnimation(buttonElement, cartIconRef.current);
+      }
+      
+      // Reset button animation
+      setTimeout(() => {
+        buttonElement.classList.remove('adding');
+        setButtonLoading(buttonId, false);
+      }, 600);
+      
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setButtonLoading(buttonId, false);
+    }
+  }, [addToCart, createFlyToCartAnimation, setButtonLoading]);
 
-  const handleToggleWishlist = useCallback((product) => {
+  const handleToggleWishlist = useCallback((product, event) => {
+    const heartElement = event.currentTarget.querySelector('i');
+    
+    // Trigger heart animation
+    triggerHeartAnimation(product.id);
+    
+    // Add active class for animation
+    if (heartElement) {
+      heartElement.classList.add('active');
+      setTimeout(() => {
+        heartElement.classList.remove('active');
+      }, 800);
+    }
+    
+    // Toggle wishlist
     toggleWishlist(product);
-  }, [toggleWishlist]);
+  }, [toggleWishlist, triggerHeartAnimation]);
 
   return (
     <div className="container py-4">
@@ -111,8 +160,10 @@ const Products = memo(() => {
                   </span>
                 )}
                 <button
-                  className={`btn btn-sm wishlist-toggle position-absolute top-0 start-0 m-2 ${isInWishlist(product.id) ? 'btn-danger' : 'btn-outline-danger'}`}
-                  onClick={() => handleToggleWishlist(product)}
+                  className={`btn btn-sm wishlist-toggle position-absolute top-0 start-0 m-2 ${
+                    isInWishlist(product.id) ? 'btn-danger' : 'btn-outline-danger'
+                  } ${isHeartActive(product.id) ? 'wishlist-heart active' : ''}`}
+                  onClick={(e) => handleToggleWishlist(product, e)}
                   title={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
                 >
                   <i className={`bi ${isInWishlist(product.id) ? 'bi-heart-fill' : 'bi-heart'}`}></i>
@@ -134,9 +185,22 @@ const Products = memo(() => {
                   <small className="text-muted">Stock: {product.stock}</small>
                 </div>
                 <div className="d-grid gap-2 mt-auto">
-                  <button className="btn btn-primary" onClick={() => handleAddToCart(product)}>
-                    <i className="bi bi-cart-plus me-2"></i>
-                    Add to Cart
+                  <button 
+                    className={`btn btn-primary btn-add-to-cart ${isButtonLoading(`add-to-cart-${product.id}`) ? 'adding' : ''}`}
+                    onClick={(e) => handleAddToCart(product, e)}
+                    disabled={isButtonLoading(`add-to-cart-${product.id}`)}
+                  >
+                    {isButtonLoading(`add-to-cart-${product.id}`) ? (
+                      <>
+                        <div className="loading-spinner me-2"></div>
+                        Adding...
+                      </>
+                    ) : (
+                      <>
+                        <i className="bi bi-cart-plus me-2"></i>
+                        Add to Cart
+                      </>
+                    )}
                   </button>
                   <Link to={`/product/${product.id}`} className="btn btn-outline-primary">
                     <i className="bi bi-eye me-2"></i>
@@ -147,6 +211,11 @@ const Products = memo(() => {
             </div>
           </div>
         ))}
+      </div>
+      
+      {/* Hidden cart icon for animation target */}
+      <div ref={cartIconRef} style={{ position: 'fixed', top: '20px', right: '20px', opacity: 0, pointerEvents: 'none' }}>
+        <i className="bi bi-cart3" style={{ fontSize: '1.5rem' }}></i>
       </div>
     </div>
   );

@@ -41,17 +41,30 @@
 .btn-primary:hover::before { left: 100%; }
 
 .btn-outline-primary {
-  border: 2px solid var(--primary-gradient);
-  color: var(--text-primary);
-  background: transparent;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid var(--primary) !important;
+  color: var(--text-primary) !important;
+  background: transparent !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-outline-primary:hover {
-  background: var(--primary-gradient);
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  background: var(--primary-gradient) !important;
+  color: white !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3) !important;
+}
+
+.btn-outline-primary:active {
+  transform: translateY(0px) !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2) !important;
+}
+
+.btn-outline-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+  outline: none !important;
 }
 
 .btn-outline-secondary { border-color: var(--border-color) !important; color: var(--text-primary) !important; }
