@@ -1,0 +1,91 @@
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .cart-item-card .card-body {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cart-controls {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .cart-item-card {
+    margin-bottom: 1rem;
+  }
+
+  .wishlist-image {
+    height: 200px;
+  }
+
+  .wishlist-card .card-body {
+    padding: 1rem;
+  }
+
+  .wishlist-card {
+    margin-bottom: 1rem;
+  }
+
+  /* Home Page Mobile */
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+
+  .hero-visual {
+    height: 300px;
+    margin-top: 2rem;
+  }
+
+  .hero-actions {
+    text-align: center;
+  }
+
+  .hero-actions .btn {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .hero-stats {
+    margin-top: 2rem;
+  }
+
+  .hero-stat {
+    padding: 0.5rem;
+  }
+
+  .hero-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .newsletter-title {
+    font-size: 1.75rem;
+  }
+
+  /* Admin panel mobile */
+  .admin-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-search {
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+
+  /* Auth forms mobile */
+  .auth-card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  /* Navbar mobile */
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+  }
+}

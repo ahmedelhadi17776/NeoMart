@@ -1,0 +1,83 @@
+/* Icon sizing and consistency */
+.navbar-nav .nav-link svg,
+.navbar-nav .nav-link i {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Bootstrap Icons sizing */
+.bi {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em;
+}
+
+/* React Bootstrap Icons sizing */
+svg[data-icon] {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+/* Consistent icon sizes for different contexts */
+.icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-lg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-xl {
+  width: 32px;
+  height: 32px;
+}
+
+/* Admin panel icons */
+.admin-edit-btn i,
+.admin-delete-btn i {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Auth form icons */
+.auth-input-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Cart and wishlist icons */
+.cart-item-card .bi,
+.wishlist-card .bi {
+  font-size: 1rem;
+}
+
+/* Button icons */
+.btn i,
+.btn svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+
+/* Ensure consistent sizing across all icon types */
+button i,
+button svg,
+.nav-link i,
+.nav-link svg,
+.dropdown-item i,
+.dropdown-item svg {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}

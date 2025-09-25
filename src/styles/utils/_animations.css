@@ -1,0 +1,26 @@
+.floating { animation: float 3s ease-in-out infinite; will-change: transform; }
+@keyframes float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -10px, 0); } }
+
+.loading { 
+  display: inline-block; 
+  width: 20px; 
+  height: 20px; 
+  border: 3px solid rgba(139, 92, 246, 0.2); 
+  border-top-color: var(--accent); 
+  border-radius: 50%; 
+  animation: spin 0.8s linear infinite; 
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Loading spinner for auth forms */
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+

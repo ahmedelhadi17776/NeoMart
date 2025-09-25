@@ -1,0 +1,231 @@
+/* Theme-specific enhancements for perfect light/dark mode compatibility */
+
+/* Text colors */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+p, span, div {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Links */
+a {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary);
+}
+
+/* Tables */
+.table {
+  color: var(--text-primary);
+  background: var(--card-bg);
+}
+
+.table th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.table td {
+  border-color: var(--border-color);
+}
+
+/* Modals */
+.modal-content {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color) !important;
+  background: var(--card-bg) !important;
+}
+
+.modal-body {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color) !important;
+  background: var(--card-bg) !important;
+}
+
+/* Alerts */
+.alert {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.alert-success {
+  background: rgba(0, 245, 160, 0.1) !important;
+  border-color: rgba(0, 245, 160, 0.3) !important;
+  color: var(--success) !important;
+}
+
+.alert-danger {
+  background: rgba(248, 113, 113, 0.1) !important;
+  border-color: rgba(248, 113, 113, 0.3) !important;
+  color: var(--error) !important;
+}
+
+.alert-warning {
+  background: rgba(255, 193, 7, 0.1) !important;
+  border-color: rgba(255, 193, 7, 0.3) !important;
+  color: #ffc107 !important;
+}
+
+.alert-info {
+  background: rgba(0, 217, 255, 0.1) !important;
+  border-color: rgba(0, 217, 255, 0.3) !important;
+  color: var(--accent) !important;
+}
+
+/* Progress bars */
+.progress {
+  background: var(--bg-secondary) !important;
+}
+
+.progress-bar {
+  background: var(--primary-gradient) !important;
+}
+
+/* List groups */
+.list-group-item {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.list-group-item:hover {
+  background: var(--bg-secondary) !important;
+}
+
+.list-group-item.active {
+  background: var(--primary-gradient) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+  background: var(--bg-secondary) !important;
+}
+
+.breadcrumb-item a {
+  color: var(--text-muted) !important;
+}
+
+.breadcrumb-item.active {
+  color: var(--text-primary) !important;
+}
+
+/* Pagination */
+.page-link {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.page-link:hover {
+  background: var(--bg-secondary) !important;
+  border-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+}
+
+.page-item.active .page-link {
+  background: var(--primary-gradient) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
+}
+
+/* Nav tabs */
+.nav-tabs .nav-link {
+  color: var(--text-muted) !important;
+  border-color: var(--border-color) !important;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--text-primary) !important;
+  border-color: var(--accent) !important;
+}
+
+.nav-tabs .nav-link.active {
+  background: var(--card-bg) !important;
+  border-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Accordion */
+.accordion-item {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.accordion-header button {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.accordion-body {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Tooltips */
+.tooltip .tooltip-inner {
+  background: var(--neutral-dark) !important;
+  color: var(--neutral-light) !important;
+}
+
+/* Popovers */
+.popover {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.popover-header {
+  background: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Offcanvas */
+.offcanvas {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Spinners */
+.spinner-border {
+  color: var(--primary) !important;
+}
+
+.spinner-grow {
+  color: var(--primary) !important;
+}

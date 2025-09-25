@@ -1,0 +1,35 @@
+.card {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color) !important;
+  border-radius: 1rem !important;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.light-theme .card { box-shadow: 0 4px 20px var(--shadow), 0 2px 8px rgba(0, 0, 0, 0.04); }
+.light-theme .card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px var(--shadow-hover), 0 4px 16px rgba(0, 0, 0, 0.08); border-color: var(--accent) !important; }
+.dark-theme .card { box-shadow: 0 10px 30px var(--shadow); }
+.dark-theme .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--shadow-hover); border-color: var(--accent) !important; }
+.card-body { color: var(--text-primary) !important; }
+
+.badge { 
+  border-radius: 1rem; 
+  font-weight: 600; 
+  letter-spacing: 0.5px; 
+  color: white !important;
+}
+.badge.bg-primary { background: var(--primary-gradient) !important; color: white !important; }
+.badge.bg-secondary { 
+  background: var(--text-muted) !important; 
+  color: var(--bg-primary) !important; 
+}
+.badge.bg-success { 
+  background: var(--success) !important; 
+  color: white !important; 
+}
+.badge.bg-danger { 
+  background: var(--error) !important; 
+  color: white !important; 
+}
+
