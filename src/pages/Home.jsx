@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from 'react';
+import React, { useState, useEffect, useCallback, memo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useWishlist } from '../contexts/WishlistContext';
@@ -7,13 +7,20 @@ const Home = memo(() => {
   const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
   const [currentFeature, setCurrentFeature] = useState(0);
+  const intervalRef = useRef(null);
 
-  // Auto-rotate features
+  // Auto-rotate features with proper cleanup
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setCurrentFeature(prev => (prev + 1) % 3);
     }, 4000);
-    return () => clearInterval(interval);
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, []);
 
   const handleFeatureClick = useCallback((index) => {

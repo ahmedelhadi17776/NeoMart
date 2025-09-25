@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback, memo } from "react";
+import React, { useState, useEffect, useCallback, memo, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import products from "../data/products.json";
 import { useCart } from "../hooks/useCart";
 import { useWishlist } from "../contexts/WishlistContext";
+import LazyImage from "../components/LazyImage";
 
 const ProductDetails = memo(() => {
   const { id } = useParams();
@@ -11,13 +12,43 @@ const ProductDetails = memo(() => {
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
-    const selectedProduct = products.find((p) => p.id === parseInt(id));
-    if (selectedProduct) {
-      setProduct(selectedProduct);
-      setIsLoading(false);
+    // Cleanup previous request if component unmounts
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
     }
+    
+    abortControllerRef.current = new AbortController();
+    
+    // Simulate async product loading with cleanup
+    const loadProduct = async () => {
+      try {
+        // Small delay to show loading state
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        if (abortControllerRef.current?.signal.aborted) return;
+        
+        const selectedProduct = products.find((p) => p.id === parseInt(id));
+        if (selectedProduct) {
+          setProduct(selectedProduct);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        if (!abortControllerRef.current?.signal.aborted) {
+          console.error('Error loading product:', error);
+        }
+      }
+    };
+    
+    loadProduct();
+    
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
   }, [id]);
 
   const handleQuantityChange = useCallback((newQuantity) => {
@@ -97,7 +128,7 @@ const ProductDetails = memo(() => {
         <div className="col-lg-6">
           <div className="product-image-gallery">
             <div className="main-image-container mb-3">
-              <img
+              <LazyImage
                 src={product.image}
                 alt={product.title}
                 className="img-fluid rounded-3 shadow-lg product-main-image"
