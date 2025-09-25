@@ -112,6 +112,15 @@ const Home = memo(() => {
             
             <div className="col-lg-6">
               <div className="hero-visual">
+                {/* Floating Particles */}
+                <div className="hero-particles">
+                  <div className="particle particle-1"></div>
+                  <div className="particle particle-2"></div>
+                  <div className="particle particle-3"></div>
+                  <div className="particle particle-4"></div>
+                  <div className="particle particle-5"></div>
+                </div>
+                
                 <div className="floating-elements">
                   <div className="floating-card card-1">
                     <i className="bi bi-lightning-charge"></i>

@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from "react";
 import { useCart } from "../hooks/useCart";
 import LazyImage from "./LazyImage";
+import { useSwipeToDelete } from "../hooks/useTouchGestures";
 
 const CartItem = memo(({ item }) => {
   const { updateQuantity, removeFromCart } = useCart();
@@ -17,8 +18,90 @@ const CartItem = memo(({ item }) => {
     removeFromCart(item.id);
   }, [removeFromCart, item.id]);
 
+  // Swipe-to-delete functionality
+  const {
+    touchHandlers,
+    mouseHandlers,
+    isSwiping,
+    swipeProgress,
+    showDelete,
+    isDeleting,
+    swipeDirection,
+    elementRef,
+    handleDeleteClick
+  } = useSwipeToDelete(handleRemove, {
+    threshold: 80,
+    deleteThreshold: 120,
+    showDeleteButton: true
+  });
+
   return (
-    <div className="cart-item-card mb-3 card-entry">
+    <div 
+      ref={elementRef}
+      className={`cart-item-card mb-3 card-entry ${isSwiping ? 'swiping' : ''} ${isDeleting ? 'deleting' : ''}`}
+      style={{
+        transform: swipeDirection === 'left' ? `translateX(-${swipeProgress}px)` : 'translateX(0)',
+        transition: isSwiping ? 'none' : 'transform 0.3s ease-out',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+      {...touchHandlers}
+      {...mouseHandlers}
+    >
+      {/* Delete button overlay */}
+      {showDelete && (
+        <div 
+          className="delete-overlay"
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '100px',
+            background: 'linear-gradient(90deg, transparent 0%, var(--error) 100%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 2,
+            opacity: Math.min(swipeProgress / 100, 1)
+          }}
+        >
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={handleDeleteClick}
+            style={{
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <i className="bi bi-trash"></i>
+          </button>
+        </div>
+      )}
+
+      {/* Swipe indicator */}
+      {isSwiping && swipeDirection === 'left' && (
+        <div 
+          className="swipe-indicator"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '20px',
+            transform: 'translateY(-50%)',
+            color: 'var(--error)',
+            fontSize: '1.5rem',
+            opacity: Math.min(swipeProgress / 80, 1),
+            zIndex: 3
+          }}
+        >
+          <i className="bi bi-arrow-left"></i>
+        </div>
+      )}
+
       <div className="card-body d-flex align-items-center p-4">
         <div className="product-image-container me-3">
           <LazyImage

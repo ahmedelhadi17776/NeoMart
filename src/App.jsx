@@ -4,6 +4,8 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import DevHelper from './components/DevHelper';
+import ErrorBoundary from './components/ErrorBoundary';
+import { PerformanceWrapper, PerformancePanel } from './utils/performanceMonitor';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -36,35 +38,100 @@ const PageLoader = () => (
 
 function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Router>
-          <div className="App">
-            <div className="bg-animation"></div>
-            <Navbar />
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/wishlist" element={<Wishlist />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/thankyou" element={<ThankYou />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/admin" element={
-                  <ProtectedRoute requireAdmin>
-                    <Admin />
-                  </ProtectedRoute>
-                } />
-              </Routes>
-            </Suspense>
-            <DevHelper />
-          </div>
-        </Router>
-      </AuthProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <AuthProvider>
+          <Router>
+            <div className="App">
+              <div className="bg-animation"></div>
+              <ErrorBoundary>
+                <PerformanceWrapper id="Navbar">
+                  <Navbar />
+                </PerformanceWrapper>
+              </ErrorBoundary>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Home">
+                        <Home />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/product/:id" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="ProductDetails">
+                        <ProductDetails />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/wishlist" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Wishlist">
+                        <Wishlist />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/products" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Products">
+                        <Products />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/cart" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Cart">
+                        <Cart />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/checkout" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Checkout">
+                        <Checkout />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/thankyou" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="ThankYou">
+                        <ThankYou />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/login" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Login">
+                        <Login />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/signup" element={
+                    <ErrorBoundary>
+                      <PerformanceWrapper id="Signup">
+                        <Signup />
+                      </PerformanceWrapper>
+                    </ErrorBoundary>
+                  } />
+                  <Route path="/admin" element={
+                    <ProtectedRoute requireAdmin>
+                      <ErrorBoundary>
+                        <PerformanceWrapper id="Admin">
+                          <Admin />
+                        </PerformanceWrapper>
+                      </ErrorBoundary>
+                    </ProtectedRoute>
+                  } />
+                </Routes>
+              </Suspense>
+              <DevHelper />
+              <PerformancePanel />
+            </div>
+          </Router>
+        </AuthProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
 
