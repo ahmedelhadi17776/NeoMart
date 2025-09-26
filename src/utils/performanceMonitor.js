@@ -3,7 +3,7 @@ import React, { Profiler } from 'react';
 // Performance monitoring utilities
 export const performanceMetrics = {
   measurements: [],
-  isEnabled: process.env.NODE_ENV === 'development'
+  isEnabled: import.meta.env.MODE === 'development'
 };
 
 // Profiler callback for performance monitoring
@@ -66,7 +66,7 @@ export const usePerformanceMonitor = (componentName) => {
     
     return () => {
       const endTime = performance.now();
-      const duration = endTime.current - startTime.current;
+      const duration = endTime - startTime.current;
       
       if (duration > 16) {
         console.warn(`⚠️ ${componentName} mount/unmount took ${duration.toFixed(2)}ms`);

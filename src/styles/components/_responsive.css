@@ -1,16 +1,5 @@
 /* Responsive Enhancements */
 @media (max-width: 768px) {
-  /* Admin panel mobile */
-  .admin-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .admin-search {
-    max-width: none;
-    margin-bottom: 1rem;
-  }
-
   /* Auth forms mobile */
   .auth-card {
     padding: 1.5rem;

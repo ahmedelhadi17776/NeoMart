@@ -4,54 +4,7 @@
   box-sizing: border-box;
 }
 
-:root {
-  /* Gradient Dreams Color Palette */
-  --primary-gradient: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
-  --secondary: #F72585;      /* Hot pink - CTAs */
-  --neutral-dark: #1A1A2E;   /* Neutral Dark */
-  --neutral-light: #FAFAFA;  /* Neutral Light */
-  --accent: #00D9FF;         /* Cyan - notifications */
-  --success: #00F5A0;        /* Neon green */
-  --gradient: linear-gradient(135deg, #667EEA 0%, #764BA2 100%);
-  --error: #F87171;
-}
-
-/* Light Theme (Default) */
-:root,
-.light-theme,
-html.light-theme,
-body.light-theme {
-  --bg-primary: #FAFAFA;
-  --bg-secondary: #FFFFFF;
-  --text-primary: #1A1A2E;
-  --text-secondary: #1A1A2E;
-  --text-muted: #1A1A2E;
-  --border-color: rgba(102, 126, 234, 0.2);
-  --card-bg: #FFFFFF;
-  --navbar-bg: var(--primary-gradient);
-  --navbar-text: #FFFFFF;
-  --shadow: rgba(0, 0, 0, 0.08);
-  --shadow-hover: rgba(0, 0, 0, 0.12);
-  --shadow-strong: rgba(0, 0, 0, 0.15);
-}
-
-/* Dark Theme */
-.dark-theme,
-html.dark-theme,
-body.dark-theme {
-  --bg-primary: #0F172A;
-  --bg-secondary: #1A1A2E;
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-muted: #94A3B8;
-  --border-color: rgba(0, 217, 255, 0.2);
-  --card-bg: rgba(26, 26, 46, 0.8);
-  --navbar-bg: rgba(26, 26, 46, 0.9);
-  --navbar-text: #F1F5F9;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 217, 255, 0.2);
-  --shadow-strong: rgba(0, 0, 0, 0.5);
-}
+/* CSS Variables are defined in styles/base/_variables.css */
 
 body {
   margin: 0;

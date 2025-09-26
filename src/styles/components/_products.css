@@ -150,12 +150,7 @@
   animation: heartBeat 0.8s ease;
 }
 
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  10%, 30% { transform: scale(0.9); }
-  20%, 40%, 60%, 80% { transform: scale(1.2); }
-  50%, 70% { transform: scale(0.95); }
-}
+/* keyframes heartBeat are defined in utils/_animations.css */
 
 /* Card Body */
 .product-card .card-body {
@@ -290,14 +285,7 @@
   animation: addToCart 0.6s ease;
 }
 
-@keyframes addToCart {
-  0% { transform: scale(1) rotate(0); }
-  20% { transform: scale(0.9) rotate(-3deg); }
-  40% { transform: scale(1.1) rotate(3deg); }
-  60% { transform: scale(0.95) rotate(-1deg); }
-  80% { transform: scale(1.05) rotate(1deg); }
-  100% { transform: scale(1) rotate(0); }
-}
+/* keyframes addToCart are defined in utils/_animations.css */
 
 /* View Details Button */
 .product-card .btn-outline-primary {
@@ -614,10 +602,7 @@
   z-index: 5;
 }
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
+/* keyframes shimmer are defined in utils/_animations.css */
 
 /* Success Animation */
 .product-card.added-to-cart {

@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 // Custom hook for swipe gestures
 export const useSwipeGesture = (onSwipeLeft, onSwipeRight, options = {}) => {
@@ -95,7 +95,6 @@ export const useSwipeToDelete = (onDelete, options = {}) => {
   const {
     threshold = 50,
     deleteThreshold = 100,
-    showDeleteButton = true,
     animationDuration = 300
   } = options;
 

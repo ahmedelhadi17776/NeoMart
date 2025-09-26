@@ -1,4 +1,10 @@
 /* Cart and Checkout specific styles */
+.empty-cart-icon {
+  font-size: 4rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
 .cart-items-container {
   animation: fadeInUp 0.4s ease-out;
 }
@@ -110,6 +116,21 @@
 }
 
 .summary-row:last-child {
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--primary);
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.summary-line:last-child {
   border-bottom: none;
   font-weight: 600;
   font-size: 1.125rem;

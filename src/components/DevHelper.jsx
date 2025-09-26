@@ -23,7 +23,7 @@ const DevHelper = memo(() => {
     window.location.reload();
   }, []);
 
-  if (process.env.NODE_ENV !== 'development') {
+  if (import.meta.env.MODE !== 'development') {
     return null;
   }
 
