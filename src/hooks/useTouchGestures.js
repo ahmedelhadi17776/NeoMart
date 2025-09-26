@@ -93,62 +93,168 @@ export const useSwipeGesture = (onSwipeLeft, onSwipeRight, options = {}) => {
 // Hook specifically for swipe-to-delete functionality
 export const useSwipeToDelete = (onDelete, options = {}) => {
   const {
-    threshold = 100,
-    deleteThreshold = 150,
-    showDeleteButton = true
+    threshold = 50,
+    deleteThreshold = 100,
+    showDeleteButton = true,
+    animationDuration = 300
   } = options;
 
+  const elementRef = useRef(null);
+  const startX = useRef(0);
+  const currentX = useRef(0);
+  const isDragging = useRef(false);
+  
   const [swipeProgress, setSwipeProgress] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState(null);
 
-  const handleSwipeLeft = useCallback(() => {
-    if (swipeProgress >= deleteThreshold) {
-      setIsDeleting(true);
-      onDelete();
-    }
-  }, [swipeProgress, deleteThreshold, onDelete]);
-
-  const handleSwipeRight = useCallback(() => {
-    setSwipeProgress(0);
-    setShowDelete(false);
+  const handleTouchStart = useCallback((e) => {
+    startX.current = e.touches[0].clientX;
+    currentX.current = e.touches[0].clientX;
+    isDragging.current = true;
+    setIsSwiping(true);
+    setSwipeDirection(null);
   }, []);
 
-  const { touchHandlers, mouseHandlers, isSwiping, swipeDirection, elementRef } = useSwipeGesture(
-    handleSwipeLeft,
-    handleSwipeRight,
-    { threshold: 10, trackMouse: true }
-  );
-
-  // Calculate swipe progress
-  useEffect(() => {
-    if (isSwiping && swipeDirection === 'left') {
-      const progress = Math.min(swipeProgress + 10, deleteThreshold + 50);
+  const handleTouchMove = useCallback((e) => {
+    if (!isDragging.current) return;
+    
+    currentX.current = e.touches[0].clientX;
+    const deltaX = startX.current - currentX.current;
+    
+    if (deltaX > 0) {
+      setSwipeDirection('left');
+      const progress = Math.min(deltaX, deleteThreshold + 50);
       setSwipeProgress(progress);
       setShowDelete(progress >= threshold);
-    } else if (!isSwiping) {
-      if (swipeProgress < threshold) {
-        setSwipeProgress(0);
-        setShowDelete(false);
+      
+      // Prevent scrolling when swiping
+      if (deltaX > 10) {
+        e.preventDefault();
       }
+    } else {
+      setSwipeDirection('right');
+      setSwipeProgress(0);
+      setShowDelete(false);
     }
-  }, [isSwiping, swipeDirection, swipeProgress, threshold, deleteThreshold]);
+  }, [threshold, deleteThreshold]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    
+    isDragging.current = false;
+    setIsSwiping(false);
+    
+    const deltaX = startX.current - currentX.current;
+    
+    if (deltaX >= deleteThreshold) {
+      // Trigger delete
+      setIsDeleting(true);
+      setTimeout(() => {
+        onDelete();
+      }, animationDuration);
+    } else if (deltaX >= threshold) {
+      // Show delete button but don't delete
+      setShowDelete(true);
+    } else {
+      // Reset
+      setSwipeProgress(0);
+      setShowDelete(false);
+      setSwipeDirection(null);
+    }
+  }, [threshold, deleteThreshold, animationDuration, onDelete]);
+
+  const handleMouseDown = useCallback((e) => {
+    startX.current = e.clientX;
+    currentX.current = e.clientX;
+    isDragging.current = true;
+    setIsSwiping(true);
+    setSwipeDirection(null);
+  }, []);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!isDragging.current) return;
+    
+    currentX.current = e.clientX;
+    const deltaX = startX.current - currentX.current;
+    
+    if (deltaX > 0) {
+      setSwipeDirection('left');
+      const progress = Math.min(deltaX, deleteThreshold + 50);
+      setSwipeProgress(progress);
+      setShowDelete(progress >= threshold);
+    } else {
+      setSwipeDirection('right');
+      setSwipeProgress(0);
+      setShowDelete(false);
+    }
+  }, [threshold, deleteThreshold]);
+
+  const handleMouseUp = useCallback(() => {
+    if (!isDragging.current) return;
+    
+    isDragging.current = false;
+    setIsSwiping(false);
+    
+    const deltaX = startX.current - currentX.current;
+    
+    if (deltaX >= deleteThreshold) {
+      setIsDeleting(true);
+      setTimeout(() => {
+        onDelete();
+      }, animationDuration);
+    } else if (deltaX >= threshold) {
+      setShowDelete(true);
+    } else {
+      setSwipeProgress(0);
+      setShowDelete(false);
+      setSwipeDirection(null);
+    }
+  }, [threshold, deleteThreshold, animationDuration, onDelete]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isDragging.current) {
+      handleMouseUp();
+    }
+  }, [handleMouseUp]);
 
   const handleDeleteClick = useCallback(() => {
     setIsDeleting(true);
-    onDelete();
-  }, [onDelete]);
+    setTimeout(() => {
+      onDelete();
+    }, animationDuration);
+  }, [onDelete, animationDuration]);
+
+  const resetState = useCallback(() => {
+    setSwipeProgress(0);
+    setShowDelete(false);
+    setIsDeleting(false);
+    setSwipeDirection(null);
+    setIsSwiping(false);
+  }, []);
 
   return {
-    touchHandlers,
-    mouseHandlers,
+    touchHandlers: {
+      onTouchStart: handleTouchStart,
+      onTouchMove: handleTouchMove,
+      onTouchEnd: handleTouchEnd
+    },
+    mouseHandlers: {
+      onMouseDown: handleMouseDown,
+      onMouseMove: handleMouseMove,
+      onMouseUp: handleMouseUp,
+      onMouseLeave: handleMouseLeave
+    },
     isSwiping,
     swipeProgress,
     showDelete,
     isDeleting,
     swipeDirection,
     elementRef,
-    handleDeleteClick
+    handleDeleteClick,
+    resetState
   };
 };
 
