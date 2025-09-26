@@ -66,7 +66,7 @@
   transform: scale(1.05);
 }
 
-.product-image-container {
+.cart-item-card .product-image-container {
   width: 120px;
   height: 120px;
   flex-shrink: 0;
@@ -75,7 +75,7 @@
   background: var(--bg-secondary);
 }
 
-.product-image {
+.cart-item-card .product-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -190,11 +190,11 @@
     flex-direction: row;
   }
   
-  .product-image-container {
+  .cart-item-card .product-image-container {
     margin-right: 1rem;
   }
   
-  .product-image {
+  .cart-item-card .product-image {
     width: 80px;
     height: 80px;
     object-fit: cover;

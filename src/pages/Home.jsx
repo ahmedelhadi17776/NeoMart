@@ -153,36 +153,36 @@ const Home = memo(() => {
               View All
             </Link>
           </div>
-          <div className="row g-4">
+          <div className="products-grid">
             {featuredProducts.map((product, index) => (
-              <div key={product.id} className="col-xl-3 col-lg-4 col-md-6">
-                <div className="card product-card h-100 card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
-                  <div className="product-image-container position-relative">
+              <div key={product.id} className="product-card-wrapper">
+                <div className="product-card card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
+                  <div className="product-image-container">
                     <LazyImage
                       src={product.image}
                       alt={product.title}
-                      className="card-img-top product-grid-image"
+                      className="product-grid-image"
                     />
                     {product.badge && (
-                      <span className="badge product-badge bg-primary position-absolute top-0 end-0 m-2">
+                      <span className="product-badge">
                         {product.badge}
                       </span>
                     )}
                   </div>
-                  <div className="card-body d-flex flex-column">
+                  <div className="card-body">
                     <div className="d-flex align-items-center justify-content-between mb-2">
-                      <span className="badge bg-secondary small">{product.category}</span>
+                      <span className="badge bg-secondary">{product.category}</span>
                       <div className="rating">
                         {[...Array(5)].map((_, i) => (
-                          <i key={i} className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`} style={{ color: '#ffc107' }}></i>
+                          <i key={i} className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`}></i>
                         ))}
                       </div>
                     </div>
-                    <h5 className="card-title mb-1">{product.title}</h5>
-                    <p className="card-text text-muted mb-3" style={{ minHeight: 48 }}>{product.description.slice(0, 80)}{product.description.length > 80 ? '…' : ''}</p>
+                    <h5 className="card-title">{product.title}</h5>
+                    <p className="card-text">{product.description.slice(0, 80)}{product.description.length > 80 ? '…' : ''}</p>
                     <div className="d-flex align-items-center justify-content-between">
-                      <span className="gradient-text fw-bold fs-5">${product.price}</span>
-                      <Link to={`/product/${product.id}`} className="btn btn-sm btn-outline-primary">
+                      <span className="gradient-text">${product.price}</span>
+                      <Link to={`/product/${product.id}`} className="btn-outline-primary">
                         Details
                       </Link>
                     </div>
