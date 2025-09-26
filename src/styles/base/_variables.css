@@ -29,3 +29,21 @@
   --shadow-strong: rgba(0, 0, 0, 0.15);
 }
 
+/* Dark Theme Variables */
+.dark-theme,
+html.dark-theme,
+body.dark-theme {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1A1A2E;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #94A3B8;
+  --border-color: rgba(0, 217, 255, 0.2);
+  --card-bg: rgba(26, 26, 46, 0.8);
+  --navbar-bg: rgba(26, 26, 46, 0.9);
+  --navbar-text: #F1F5F9;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 217, 255, 0.2);
+  --shadow-strong: rgba(0, 0, 0, 0.5);
+}
+

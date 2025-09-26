@@ -42,13 +42,6 @@ svg[data-icon] {
   height: 32px;
 }
 
-/* Admin panel icons */
-.admin-edit-btn i,
-.admin-delete-btn i {
-  font-size: 1rem;
-  line-height: 1;
-}
-
 /* Auth form icons */
 .auth-input-icon {
   width: 20px;

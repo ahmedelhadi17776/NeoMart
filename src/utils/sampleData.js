@@ -1,50 +1,32 @@
-// Sample data utilities for testing
-import products from '../data/products.json';
+import { getProducts } from './productsStore';
 
+// Sample data for development/testing
 export const addSampleCartItems = () => {
-  // Add some sample items to cart for testing
-  const sampleItems = [
-    { product: products[0], quantity: 2 }, // React Pro T-Shirt
-    { product: products[1], quantity: 1 }, // JavaScript Mug
-    { product: products[6], quantity: 1 }, // TypeScript Keyboard
-  ];
-
-  const cartItems = sampleItems.map(({ product, quantity }) => ({
+  const products = getProducts();
+  const sampleItems = products.slice(0, 3).map(product => ({
     id: product.id,
     title: product.title,
     price: product.price,
     image: product.image,
-    quantity,
-    stock: product.stock
+    quantity: Math.floor(Math.random() * 3) + 1,
+    stock: product.stock ?? null
   }));
 
-  localStorage.setItem('flux-cart', JSON.stringify(cartItems));
-  return cartItems;
+  // Match app storage key
+  localStorage.setItem('flux-cart', JSON.stringify(sampleItems));
 };
 
 export const addSampleWishlistItems = () => {
-  // Add some sample items to wishlist for testing
-  const sampleItems = [
-    products[2], // CSS Ninja Sticker Pack
-    products[4], // Python Developer Notebook
-    products[11], // Next.js Wireless Headphones
-    products[6], // TypeScript Keyboard
-    products[9], // Webpack Backpack
-  ];
+  const products = getProducts();
+  const sampleWishlist = products.slice(3, 6);
 
-  localStorage.setItem('flux-wishlist', JSON.stringify(sampleItems));
-  return sampleItems;
+  // Match app storage key
+  localStorage.setItem('flux-wishlist', JSON.stringify(sampleWishlist));
 };
 
 export const clearAllData = () => {
   localStorage.removeItem('flux-cart');
   localStorage.removeItem('flux-wishlist');
   localStorage.removeItem('flux-theme');
+  localStorage.removeItem('flux-user');
 };
-
-// Add to window for easy testing in browser console
-if (typeof window !== 'undefined') {
-  window.addSampleCartItems = addSampleCartItems;
-  window.addSampleWishlistItems = addSampleWishlistItems;
-  window.clearAllData = clearAllData;
-}

@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  const login = useCallback((email, password) => {
+  const login = useCallback((email) => {
     // Dummy auth: any email/password works. Admin if email ends with @admin.com
     const isAdmin = /@admin\.com$/i.test(email);
     const nameGuess = email.split('@')[0].replace(/\W+/g, ' ').trim() || 'User';
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
     return nextUser;
   }, []);
 
-  const signup = useCallback((name, email, password) => {
+  const signup = useCallback((name, email) => {
     const isAdmin = /@admin\.com$/i.test(email);
     const displayName = name?.trim() || email.split('@')[0];
     const nextUser = { name: displayName, email, isAdmin };

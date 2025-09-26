@@ -84,7 +84,7 @@ const cartReducer = (state, action) => {
         total: 0
       };
     
-    case 'LOAD_CART':
+    case 'LOAD_CART': {
       const items = action.payload || [];
       return {
         ...state,
@@ -92,6 +92,7 @@ const cartReducer = (state, action) => {
         count: items.reduce((s, i) => s + i.quantity, 0),
         total: items.reduce((s, i) => s + i.price * i.quantity, 0)
       };
+    }
     
     default:
       return state;

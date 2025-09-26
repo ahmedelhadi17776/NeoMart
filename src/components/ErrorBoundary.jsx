@@ -11,7 +11,7 @@ class ErrorBoundary extends Component {
     };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     // Update state so the next render will show the fallback UI
     return { hasError: true };
   }
@@ -26,7 +26,7 @@ class ErrorBoundary extends Component {
     });
 
     // In production, you might want to send this to an error reporting service
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.MODE === 'production') {
       // Example: Send to error reporting service
       // errorReportingService.captureException(error, { extra: errorInfo });
     }
@@ -65,7 +65,7 @@ class ErrorBoundary extends Component {
                     Don't worry, our team has been notified and is working on a fix.
                   </p>
 
-                  {process.env.NODE_ENV === 'development' && this.state.error && (
+                  {import.meta.env.MODE === 'development' && this.state.error && (
                     <div className="alert alert-danger text-start mb-4">
                       <h6 className="alert-heading">Error Details (Development Only)</h6>
                       <details>

@@ -11,7 +11,6 @@ export default defineConfig({
           // Vendor chunks for better caching
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
-          bootstrap: ['bootstrap'],
           // Feature-based chunks
           cart: ['./src/contexts/CartContext.jsx', './src/hooks/useCart.js'],
           wishlist: ['./src/contexts/WishlistContext.jsx'],
@@ -34,8 +33,7 @@ export default defineConfig({
             './src/components/Navbar.jsx',
             './src/components/LazyImage.jsx',
             './src/components/CartItem.jsx',
-            './src/components/ErrorBoundary.jsx',
-            './src/components/Skeleton.jsx'
+            './src/components/ErrorBoundary.jsx'
           ]
         }
       }
