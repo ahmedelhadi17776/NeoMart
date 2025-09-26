@@ -6,7 +6,4 @@
   color: transparent;
 }
 
-.theme-toggle { position: relative; overflow: hidden; }
-.theme-toggle:hover { background: rgba(255, 255, 255, 0.2) !important; transform: scale(1.1); }
-.theme-toggle:active { transform: scale(0.95); }
 

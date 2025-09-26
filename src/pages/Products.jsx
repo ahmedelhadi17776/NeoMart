@@ -144,49 +144,50 @@ const Products = memo(() => {
         </div>
       </div>
 
-      <div className="row g-4 products-grid">
+      <div className="products-grid">
         {filtered.map((product, index) => (
-          <div key={product.id} className="col-xl-3 col-lg-4 col-md-6">
-            <div className="card product-card h-100 card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
-              <div className="product-image-container position-relative">
+          <div key={product.id} className="product-card-wrapper">
+            <div className="product-card card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
+              <div className="product-image-container">
                 <LazyImage
                   src={product.image}
                   alt={product.title}
-                  className="card-img-top product-grid-image"
+                  className="product-grid-image"
                 />
                 {product.badge && (
-                  <span className="badge product-badge bg-primary position-absolute top-0 end-0 m-2">
+                  <span className="product-badge">
                     {product.badge}
                   </span>
                 )}
                 <button
-                  className={`btn btn-sm wishlist-toggle position-absolute top-0 start-0 m-2 ${
+                  className={`wishlist-toggle ${
                     isInWishlist(product.id) ? 'btn-danger' : 'btn-outline-danger'
                   } ${isHeartActive(product.id) ? 'wishlist-heart active' : ''}`}
                   onClick={(e) => handleToggleWishlist(product, e)}
                   title={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
+                  aria-label={isInWishlist(product.id) ? 'Remove from wishlist' : 'Add to wishlist'}
                 >
                   <i className={`bi ${isInWishlist(product.id) ? 'bi-heart-fill' : 'bi-heart'}`}></i>
                 </button>
               </div>
-              <div className="card-body d-flex flex-column">
+              <div className="card-body">
                 <div className="d-flex align-items-center justify-content-between mb-2">
-                  <span className="badge bg-secondary small">{product.category}</span>
+                  <span className="badge bg-secondary">{product.category}</span>
                   <div className="rating">
                     {[...Array(5)].map((_, i) => (
-                      <i key={i} className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`} style={{ color: '#ffc107' }}></i>
+                      <i key={i} className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`}></i>
                     ))}
                   </div>
                 </div>
-                <h5 className="card-title mb-1">{product.title}</h5>
-                <p className="card-text text-muted mb-3" style={{ minHeight: 48 }}>{product.description.slice(0, 80)}{product.description.length > 80 ? '…' : ''}</p>
+                <h5 className="card-title">{product.title}</h5>
+                <p className="card-text">{product.description.slice(0, 80)}{product.description.length > 80 ? '…' : ''}</p>
                 <div className="d-flex align-items-center justify-content-between mb-3">
-                  <span className="gradient-text fw-bold fs-5">${product.price}</span>
+                  <span className="gradient-text">${product.price}</span>
                   <small className="text-muted">Stock: {product.stock}</small>
                 </div>
-                <div className="d-grid gap-2 mt-auto">
+                <div className="d-grid">
                   <button 
-                    className={`btn btn-primary btn-add-to-cart ${isButtonLoading(`add-to-cart-${product.id}`) ? 'adding' : ''}`}
+                    className={`btn-add-to-cart ${isButtonLoading(`add-to-cart-${product.id}`) ? 'adding' : ''}`}
                     onClick={(e) => handleAddToCart(product, e)}
                     disabled={isButtonLoading(`add-to-cart-${product.id}`)}
                   >
@@ -202,7 +203,7 @@ const Products = memo(() => {
                       </>
                     )}
                   </button>
-                  <Link to={`/product/${product.id}`} className="btn btn-outline-primary">
+                  <Link to={`/product/${product.id}`} className="btn-outline-primary">
                     <i className="bi bi-eye me-2"></i>
                     View Details
                   </Link>

@@ -28,12 +28,21 @@ const CartItem = memo(({ item }) => {
     isDeleting,
     swipeDirection,
     elementRef,
-    handleDeleteClick
+    handleDeleteClick,
+    resetState
   } = useSwipeToDelete(handleRemove, {
-    threshold: 80,
-    deleteThreshold: 120,
-    showDeleteButton: true
+    threshold: 50,
+    deleteThreshold: 100,
+    showDeleteButton: true,
+    animationDuration: 300
   });
+
+  const handleCardClick = useCallback((e) => {
+    // If delete overlay is showing, reset the swipe state
+    if (showDelete && !e.target.closest('.delete-overlay')) {
+      resetState();
+    }
+  }, [showDelete, resetState]);
 
   return (
     <div 
@@ -43,8 +52,10 @@ const CartItem = memo(({ item }) => {
         transform: swipeDirection === 'left' ? `translateX(-${swipeProgress}px)` : 'translateX(0)',
         transition: isSwiping ? 'none' : 'transform 0.3s ease-out',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        cursor: showDelete ? 'pointer' : 'default'
       }}
+      onClick={handleCardClick}
       {...touchHandlers}
       {...mouseHandlers}
     >
@@ -57,13 +68,14 @@ const CartItem = memo(({ item }) => {
             top: 0,
             right: 0,
             bottom: 0,
-            width: '100px',
-            background: 'linear-gradient(90deg, transparent 0%, var(--error) 100%)',
+            width: '120px',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(220, 38, 38, 0.9) 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             zIndex: 2,
-            opacity: Math.min(swipeProgress / 100, 1)
+            opacity: Math.min(swipeProgress / 80, 1),
+            backdropFilter: 'blur(5px)'
           }}
         >
           <button
@@ -71,11 +83,25 @@ const CartItem = memo(({ item }) => {
             onClick={handleDeleteClick}
             style={{
               borderRadius: '50%',
-              width: '40px',
-              height: '40px',
+              width: '50px',
+              height: '50px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              fontSize: '1.3rem',
+              boxShadow: '0 4px 12px rgba(220, 38, 38, 0.4)',
+              border: 'none',
+              background: 'rgba(220, 38, 38, 0.9)',
+              color: 'white',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'scale(1.1)';
+              e.target.style.background = 'var(--error)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'scale(1)';
+              e.target.style.background = 'rgba(220, 38, 38, 0.9)';
             }}
           >
             <i className="bi bi-trash"></i>
@@ -90,15 +116,21 @@ const CartItem = memo(({ item }) => {
           style={{
             position: 'absolute',
             top: '50%',
-            right: '20px',
+            left: '20px',
             transform: 'translateY(-50%)',
-            color: 'var(--error)',
-            fontSize: '1.5rem',
-            opacity: Math.min(swipeProgress / 80, 1),
-            zIndex: 3
+            color: 'var(--text-muted)',
+            fontSize: '0.8rem',
+            fontWeight: '500',
+            zIndex: 3,
+            opacity: Math.min(swipeProgress / 50, 1),
+            background: 'rgba(0, 0, 0, 0.1)',
+            padding: '4px 8px',
+            borderRadius: '12px',
+            backdropFilter: 'blur(10px)'
           }}
         >
-          <i className="bi bi-arrow-left"></i>
+          <i className="bi bi-arrow-left me-1"></i>
+          {swipeProgress >= 100 ? 'Release to delete' : 'Swipe to delete'}
         </div>
       )}
 
