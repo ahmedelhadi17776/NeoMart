@@ -221,9 +221,6 @@ html {
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 
 /* Auth subtle gradient background for inputs */
 .floating {
@@ -231,10 +228,6 @@ html {
   will-change: transform;
 }
 
-@keyframes float {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -10px, 0); }
-}
 .auth-card .form-control.is-valid {
   border-color: rgba(0, 245, 160, 0.6) !important;
 }

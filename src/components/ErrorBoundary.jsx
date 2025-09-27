@@ -74,7 +74,7 @@ class ErrorBoundary extends Component {
                           {this.state.error.toString()}
                         </pre>
                         {this.state.errorInfo && (
-                          <pre style={{ fontSize: '0.75rem', color: '#6c757d' }}>
+                          <pre style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                             {this.state.errorInfo.componentStack}
                           </pre>
                         )}

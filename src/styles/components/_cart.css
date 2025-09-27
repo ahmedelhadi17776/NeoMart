@@ -46,16 +46,35 @@
 .cart-item-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px var(--shadow-hover);
+  border-color: var(--accent);
 }
 
-.cart-item-card:hover::before {
-  opacity: 1;
+/* Theme-specific hover enhancements */
+.light-theme .cart-item-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.dark-theme .cart-item-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 217, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.light-theme .cart-item-card:hover::before {
+  opacity: 0.03;
+}
+
+.dark-theme .cart-item-card:hover::before {
+  opacity: 0.08;
 }
 
 .cart-item-card .card-body {
   position: relative;
   z-index: 2;
   background: transparent;
+  color: var(--text-primary);
+}
+
+.cart-item-card .card-body * {
+  color: inherit;
 }
 
 .cart-item-card:hover .product-image {
