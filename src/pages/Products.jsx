@@ -108,8 +108,8 @@ const Products = memo(() => {
           <small className="text-muted">Browse our curated developer gear</small>
         </div>
         <div className="d-flex flex-wrap gap-2 filters-bar">
-          <div className="input-group" style={{ maxWidth: 280 }}>
-            <span className="input-group-text" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}>
+          <div className="input-group">
+            <span className="input-group-text">
               <i className="bi bi-search"></i>
             </span>
             <input
@@ -117,14 +117,12 @@ const Products = memo(() => {
               placeholder="Search products..."
               value={query}
               onChange={e => setQuery(e.target.value)}
-              style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
             />
           </div>
           <select
             className="form-select"
             value={category}
             onChange={e => setCategory(e.target.value)}
-            style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
           >
             <option value="All">All Categories</option>
             {categoryList.map((c) => (
@@ -135,7 +133,6 @@ const Products = memo(() => {
             className="form-select"
             value={sortBy}
             onChange={e => setSortBy(e.target.value)}
-            style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
           >
             {sortOptions.map(o => (
               <option key={o.key} value={o.key}>{o.label}</option>
@@ -145,9 +142,9 @@ const Products = memo(() => {
       </div>
 
       <div className="products-grid">
-        {filtered.map((product, index) => (
+        {filtered.map((product) => (
           <div key={product.id} className="product-card-wrapper">
-            <div className="product-card card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
+            <div className="product-card card-entry">
               <div className="product-image-container">
                 <LazyImage
                   src={product.image}
@@ -215,8 +212,8 @@ const Products = memo(() => {
       </div>
       
       {/* Hidden cart icon for animation target */}
-      <div ref={cartIconRef} style={{ position: 'fixed', top: '20px', right: '20px', opacity: 0, pointerEvents: 'none' }}>
-        <i className="bi bi-cart3" style={{ fontSize: '1.5rem' }}></i>
+      <div ref={cartIconRef} className="cart-animation-target">
+        <i className="bi bi-cart3"></i>
       </div>
     </div>
   );

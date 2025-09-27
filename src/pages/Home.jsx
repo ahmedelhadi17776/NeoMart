@@ -154,9 +154,9 @@ const Home = memo(() => {
             </Link>
           </div>
           <div className="products-grid">
-            {featuredProducts.map((product, index) => (
+            {featuredProducts.map((product) => (
               <div key={product.id} className="product-card-wrapper">
-                <div className="product-card card-entry" style={{ animationDelay: `${index * 0.05}s` }}>
+                <div className="product-card card-entry">
                   <div className="product-image-container">
                     <LazyImage
                       src={product.image}

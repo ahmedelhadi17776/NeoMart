@@ -19,16 +19,6 @@
 .cart-item-wrapper:nth-child(4) { animation-delay: 0.4s; }
 
 /* Cart-specific animation keyframes */
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
 .cart-item-card {
   background: var(--card-bg);

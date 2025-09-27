@@ -176,17 +176,6 @@ html {
   border-radius: 16px;
 }
 
-/* Neon glow effect */
-.neon-glow {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-}
-
-/* Gradient borders */
-.gradient-border {
-  border: 2px solid transparent;
-  background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
-              var(--gradient) border-box;
-}
 
 /* Optimized Card Entry Animations */
 .card-entry {

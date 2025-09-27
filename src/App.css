@@ -1,6 +1,6 @@
-/* App.css - Cleaned up unused styles */
+/* App.css - Minimal global styles */
 
-/* Button variants - Used in components */
+/* Global button variants that extend Bootstrap */
 .btn-outline-secondary {
   border-color: var(--border-color) !important;
   color: var(--text-primary) !important;
@@ -21,7 +21,3 @@
   background: #dc2626 !important;
   border-color: #dc2626 !important;
 }
-
-/* Note: Admin and Auth styles moved to component-specific CSS files */
-/* Admin styles are not used in Admin.jsx - using wishlist-card instead */
-/* Auth styles are duplicated in styles/components/_forms.css */
