@@ -91,7 +91,7 @@ a:hover {
 .alert-warning {
   background: rgba(255, 193, 7, 0.1) !important;
   border-color: rgba(255, 193, 7, 0.3) !important;
-  color: #ffc107 !important;
+  color: var(--warning) !important;
 }
 
 .alert-info {

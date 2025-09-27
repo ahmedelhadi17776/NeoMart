@@ -176,17 +176,6 @@ html {
   border-radius: 16px;
 }
 
-/* Neon glow effect */
-.neon-glow {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-}
-
-/* Gradient borders */
-.gradient-border {
-  border: 2px solid transparent;
-  background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
-              var(--gradient) border-box;
-}
 
 /* Optimized Card Entry Animations */
 .card-entry {
@@ -232,9 +221,6 @@ html {
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
 
 /* Auth subtle gradient background for inputs */
 .floating {
@@ -242,10 +228,6 @@ html {
   will-change: transform;
 }
 
-@keyframes float {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -10px, 0); }
-}
 .auth-card .form-control.is-valid {
   border-color: rgba(0, 245, 160, 0.6) !important;
 }

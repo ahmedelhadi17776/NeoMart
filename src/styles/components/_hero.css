@@ -92,24 +92,6 @@
   animation-delay: 8s;
 }
 
-@keyframes floatParticle {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-    opacity: 0.1;
-  }
-  25% {
-    transform: translateY(-20px) translateX(10px);
-    opacity: 0.2;
-  }
-  50% {
-    transform: translateY(-40px) translateX(-5px);
-    opacity: 0.15;
-  }
-  75% {
-    transform: translateY(-20px) translateX(-10px);
-    opacity: 0.25;
-  }
-}
 
 .hero-badge .badge {
   background: var(--primary-gradient) !important;
@@ -281,41 +263,6 @@
 }
 
 /* Floating Card Animations */
-@keyframes floatCard1 {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% { 
-    transform: translateY(-20px) rotate(5deg);
-  }
-}
-
-@keyframes floatCard2 {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% { 
-    transform: translateY(-15px) rotate(-3deg);
-  }
-}
-
-@keyframes floatCard3 {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% { 
-    transform: translateY(-25px) rotate(7deg);
-  }
-}
-
-@keyframes floatCard4 {
-  0%, 100% { 
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% { 
-    transform: translateY(-18px) rotate(-4deg);
-  }
-}
 
 /* Mobile Hero */
 @media (max-width: 768px) {

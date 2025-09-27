@@ -164,7 +164,6 @@ const ProductDetails = memo(() => {
                     <i
                       key={i}
                       className={`bi bi-star${i < Math.floor(product.rating || 0) ? '-fill' : ''}`}
-                      style={{ color: '#ffc107' }}
                     ></i>
                   ))}
                 </div>
