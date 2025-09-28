@@ -17,9 +17,7 @@ p, span, div {
   color: var(--text-primary) !important;
 }
 
-.text-secondary {
-  color: var(--text-secondary) !important;
-}
+/* .text-secondary removed (backup in scripts/backups/_theme-enhancements.css.bak) */
 
 /* Links */
 a {
@@ -139,24 +137,7 @@ a:hover {
   color: var(--text-primary) !important;
 }
 
-/* Pagination */
-.page-link {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-.page-link:hover {
-  background: var(--bg-secondary) !important;
-  border-color: var(--accent) !important;
-  color: var(--text-primary) !important;
-}
-
-.page-item.active .page-link {
-  background: var(--primary-gradient) !important;
-  border-color: var(--primary) !important;
-  color: white !important;
-}
+/* Pagination styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
 
 /* Nav tabs */
 .nav-tabs .nav-link {
@@ -175,57 +156,12 @@ a:hover {
   color: var(--text-primary) !important;
 }
 
-/* Accordion */
-.accordion-item {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-}
+/* Accordion styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
 
-.accordion-header button {
-  background: var(--card-bg) !important;
-  color: var(--text-primary) !important;
-  border-bottom: 1px solid var(--border-color) !important;
-}
+/* Tooltip inner styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
 
-.accordion-body {
-  background: var(--bg-secondary) !important;
-  color: var(--text-primary) !important;
-}
+/* Popover styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
 
-/* Tooltips */
-.tooltip .tooltip-inner {
-  background: var(--neutral-dark) !important;
-  color: var(--neutral-light) !important;
-}
+/* Offcanvas styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
 
-/* Popovers */
-.popover {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-.popover-header {
-  background: var(--bg-secondary) !important;
-  border-bottom: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Offcanvas */
-.offcanvas {
-  background: var(--card-bg) !important;
-  color: var(--text-primary) !important;
-}
-
-.offcanvas-header {
-  border-bottom: 1px solid var(--border-color) !important;
-}
-
-/* Spinners */
-.spinner-border {
-  color: var(--primary) !important;
-}
-
-.spinner-grow {
-  color: var(--primary) !important;
-}
+/* Spinner styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */

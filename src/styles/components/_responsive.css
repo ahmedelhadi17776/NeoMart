@@ -155,15 +155,7 @@
     font-size: 0.95rem;
   }
 
-  /* Mobile pagination improvements */
-  .pagination {
-    justify-content: center;
-  }
-
-  .page-link {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-  }
+  /* Mobile pagination improvements removed (backup in scripts/backups/_responsive.css.bak) */
 }
 
 @media (max-width: 576px) {
