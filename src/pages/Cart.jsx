@@ -56,7 +56,7 @@ const CartPage = memo(() => {
 
   return (
     <div className="container py-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
         <h2 className="gradient-text mb-0">Shopping Cart</h2>
         <div className="d-flex align-items-center gap-3">
           <span className="badge bg-primary fs-6 px-3 py-2">
@@ -84,7 +84,7 @@ const CartPage = memo(() => {
         </div>
 
         <div className="col-lg-4">
-          <div className="card glass-card p-4 card-entry sticky-top checkout-summary" style={{ top: "100px" }}>
+          <div className="card glass-card p-4 card-entry checkout-summary">
             <div className="d-flex align-items-center mb-3">
               <i className="bi bi-receipt me-2" style={{ color: "var(--accent)" }}></i>
               <h5 className="gradient-text mb-0">Order Summary</h5>

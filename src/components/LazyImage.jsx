@@ -29,7 +29,7 @@ const LazyImage = memo(({
           });
         },
         {
-          rootMargin: '50px', // Start loading 50px before the image comes into view
+          rootMargin: '100px', // Increased margin for mobile
           threshold: 0.1
         }
       );

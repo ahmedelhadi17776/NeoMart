@@ -181,9 +181,10 @@ const Home = memo(() => {
                     <h5 className="card-title">{product.title}</h5>
                     <p className="card-text">{product.description.slice(0, 80)}{product.description.length > 80 ? '…' : ''}</p>
                     <div className="d-flex align-items-center justify-content-between">
-                      <span className="gradient-text">${product.price}</span>
-                      <Link to={`/product/${product.id}`} className="btn-outline-primary">
-                        Details
+                      <span className="gradient-text fw-bold fs-5">${product.price}</span>
+                      <Link to={`/product/${product.id}`} className="btn btn-primary btn-sm">
+                        <i className="bi bi-eye me-1"></i>
+                        View
                       </Link>
                     </div>
                   </div>
