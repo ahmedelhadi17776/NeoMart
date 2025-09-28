@@ -1,167 +1,76 @@
 /* Theme-specific enhancements for perfect light/dark mode compatibility */
 
-/* Text colors */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-primary) !important;
+/* Theme-specific enhancements were aggressively pruned for unused Bootstrap-targeted selectors. See backups in scripts/backups/_theme-enhancements.css.bak */
+
+/* Accessibility / dark-mode fix
+	 Ensure headings, body text, links and muted text use the project's CSS variables
+	 so text remains readable in both light and dark themes. This is intentionally
+	 small and targeted (no restoration of large Bootstrap-specific blocks).
+*/
+.light-theme h1, .light-theme h2, .light-theme h3, .light-theme h4, .light-theme h5, .light-theme h6,
+.light-theme p, .light-theme span, .light-theme div {
+	color: var(--text-primary) !important;
 }
 
-p, span, div {
-  color: var(--text-primary);
+.dark-theme h1, .dark-theme h2, .dark-theme h3, .dark-theme h4, .dark-theme h5, .dark-theme h6,
+.dark-theme p, .dark-theme span, .dark-theme div {
+	color: var(--text-primary) !important;
 }
 
-.text-muted {
-  color: var(--text-muted) !important;
+/* Muted text should respect the variable in both themes */
+.light-theme .text-muted,
+.dark-theme .text-muted {
+	color: var(--text-muted) !important;
 }
 
-.text-primary {
-  color: var(--text-primary) !important;
+/* Links: show accent on dark for visibility, keep primary in light */
+.light-theme a {
+	color: var(--text-primary) !important;
+}
+.dark-theme a {
+	color: var(--accent) !important;
 }
 
-/* .text-secondary removed (backup in scripts/backups/_theme-enhancements.css.bak) */
-
-/* Links */
-a {
-  color: var(--text-primary);
-  transition: color 0.3s ease;
+/* Small helpers for components that use generic elements */
+.dark-theme .card, .dark-theme .product-card, .dark-theme .products-header {
+	color: var(--text-primary);
 }
 
-a:hover {
-  color: var(--secondary);
+/* Component-specific dark-mode readability fixes
+	 These override remaining hard-coded whites or missing dark rules so text is visible
+	 in dark mode on Home, Products and Product Details pages. Kept minimal and targeted.
+*/
+.dark-theme .product-card,
+.dark-theme .product-card .card-body,
+.dark-theme .product-card .card-title,
+.dark-theme .product-card .card-text,
+.dark-theme .product-card .badge,
+.dark-theme .product-badge,
+.dark-theme .products-header,
+.dark-theme .products-header *,
+.dark-theme .results-counter .badge,
+.dark-theme .card-body,
+.dark-theme .products-grid .product-card .gradient-text,
+.dark-theme .suggestion-item,
+.dark-theme .suggestion-title,
+.dark-theme .suggestion-item small,
+.dark-theme .filter-label,
+.dark-theme .filter-select,
+.dark-theme .clear-filters-btn {
+	color: var(--text-primary) !important;
 }
 
-/* Tables */
-.table {
-  color: var(--text-primary);
-  background: var(--card-bg);
+/* Badges that use strong backgrounds should still show light text; prefer the
+	 theme variable which is light in dark-theme. Use navbar-text as a safe fallback. */
+.dark-theme .badge,
+.dark-theme .badge.bg-primary,
+.dark-theme .badge.bg-success,
+.dark-theme .badge.bg-secondary {
+	color: var(--navbar-text) !important;
 }
 
-.table th {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  border-color: var(--border-color);
+/* Loading spinner: keep accent visible on dark backgrounds */
+.dark-theme .loading-spinner {
+	border: 2px solid rgba(255,255,255,0.06);
+	border-top-color: var(--accent);
 }
-
-.table td {
-  border-color: var(--border-color);
-}
-
-/* Modals */
-.modal-content {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-.modal-header {
-  border-bottom: 1px solid var(--border-color) !important;
-  background: var(--card-bg) !important;
-}
-
-.modal-body {
-  background: var(--card-bg) !important;
-  color: var(--text-primary) !important;
-}
-
-.modal-footer {
-  border-top: 1px solid var(--border-color) !important;
-  background: var(--card-bg) !important;
-}
-
-/* Alerts */
-.alert {
-  background: var(--bg-secondary) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-.alert-success {
-  background: rgba(0, 245, 160, 0.1) !important;
-  border-color: rgba(0, 245, 160, 0.3) !important;
-  color: var(--success) !important;
-}
-
-.alert-danger {
-  background: rgba(248, 113, 113, 0.1) !important;
-  border-color: rgba(248, 113, 113, 0.3) !important;
-  color: var(--error) !important;
-}
-
-.alert-warning {
-  background: rgba(255, 193, 7, 0.1) !important;
-  border-color: rgba(255, 193, 7, 0.3) !important;
-  color: var(--warning) !important;
-}
-
-.alert-info {
-  background: rgba(0, 217, 255, 0.1) !important;
-  border-color: rgba(0, 217, 255, 0.3) !important;
-  color: var(--accent) !important;
-}
-
-/* Progress bars */
-.progress {
-  background: var(--bg-secondary) !important;
-}
-
-.progress-bar {
-  background: var(--primary-gradient) !important;
-}
-
-/* List groups */
-.list-group-item {
-  background: var(--card-bg) !important;
-  border: 1px solid var(--border-color) !important;
-  color: var(--text-primary) !important;
-}
-
-.list-group-item:hover {
-  background: var(--bg-secondary) !important;
-}
-
-.list-group-item.active {
-  background: var(--primary-gradient) !important;
-  border-color: var(--primary) !important;
-  color: white !important;
-}
-
-/* Breadcrumbs */
-.breadcrumb {
-  background: var(--bg-secondary) !important;
-}
-
-.breadcrumb-item a {
-  color: var(--text-muted) !important;
-}
-
-.breadcrumb-item.active {
-  color: var(--text-primary) !important;
-}
-
-/* Pagination styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
-
-/* Nav tabs */
-.nav-tabs .nav-link {
-  color: var(--text-muted) !important;
-  border-color: var(--border-color) !important;
-}
-
-.nav-tabs .nav-link:hover {
-  color: var(--text-primary) !important;
-  border-color: var(--accent) !important;
-}
-
-.nav-tabs .nav-link.active {
-  background: var(--card-bg) !important;
-  border-color: var(--accent) !important;
-  color: var(--text-primary) !important;
-}
-
-/* Accordion styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
-
-/* Tooltip inner styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
-
-/* Popover styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
-
-/* Offcanvas styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */
-
-/* Spinner styles removed (backup in scripts/backups/_theme-enhancements.css.bak) */

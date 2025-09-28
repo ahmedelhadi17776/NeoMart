@@ -133,58 +133,7 @@
   box-shadow: 0 8px 25px var(--shadow-hover);
 }
 
-.hero-stats {
-  margin-top: 3rem;
-}
-
-.hero-stats .stat-item {
-  padding: 1rem;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-}
-
-.hero-stats .stat-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--shadow);
-  border-color: var(--accent);
-}
-
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.hero-stat {
-  text-align: center;
-  padding: 1rem;
-}
-
-.hero-stat-number {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary);
-  display: block;
-}
-
-.hero-stat-label {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 0.25rem;
-}
+/* Hero-stat blocks removed as part of aggressive purge (backup in scripts/backups/_hero.css.bak) */
 
 /* Hero Visual */
 .hero-visual {

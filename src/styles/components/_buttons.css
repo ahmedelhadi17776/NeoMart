@@ -6,7 +6,9 @@
 }
 
 .btn-primary {
-  background: var(--primary-gradient) !important;
+  /* Use theme-aware variables - light: outlined, dark: solid */
+  background: var(--primary-btn-bg) !important;
+  color: var(--primary-btn-text) !important;
   border: 2px solid transparent !important;
   border-radius: 0.5rem !important;
   font-weight: 600;
@@ -75,9 +77,10 @@
 
 /* Product-specific button styles */
 .btn-add-to-cart {
-  background: var(--primary-gradient) !important;
-  border: none !important;
-  color: white !important;
+  /* align with .btn-primary theme behavior */
+  background: var(--primary-btn-bg) !important;
+  color: var(--primary-btn-text) !important;
+  border: 2px solid transparent !important;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
