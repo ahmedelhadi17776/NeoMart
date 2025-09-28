@@ -1,14 +1,12 @@
 import React, { memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Cart3, Person, Sun, Moon, Heart } from 'react-bootstrap-icons';
+import { Person, Sun, Moon, Heart } from 'react-bootstrap-icons';
 import { useTheme } from '../contexts/ThemeContext';
-import { useCart } from '../hooks/useCart';
 import { useWishlist } from '../contexts/WishlistContext';
 import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = memo(() => {
   const { isDarkMode, toggleTheme } = useTheme();
-  const { cartCount } = useCart();
   const { wishlistCount } = useWishlist();
   const { user, isAdmin, isAuthenticated, logout } = useAuth();
 
@@ -46,13 +44,13 @@ const Navbar = memo(() => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/cart">
-                Cart
+              <Link className="nav-link" to="/products">
+                Products
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/products">
-                Products
+              <Link className="nav-link" to="/cart">
+                Cart
               </Link>
             </li>
             <li className="nav-item">
@@ -76,47 +74,8 @@ const Navbar = memo(() => {
             </li>
           </ul>
 
-          {/* Right side - Theme toggle, Cart preview and Auth links */}
+          {/* Right side - Auth links and Theme toggle */}
           <ul className="navbar-nav">
-            {/* Theme Toggle */}
-            <li className="nav-item">
-              <button 
-                className="nav-link btn btn-link theme-toggle" 
-                onClick={handleThemeToggle}
-                aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
-                style={{
-                  border: 'none',
-                  background: 'transparent',
-                  color: 'var(--navbar-text)',
-                  padding: '0.5rem',
-                  borderRadius: '50%',
-                  transition: 'all 0.3s ease'
-                }}
-              >
-                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            </li>
-
-            {/* Cart Preview */}
-            <li className="nav-item">
-              <Link className="nav-link position-relative" to="/cart">
-                <Cart3 size={20} />
-                {cartCount > 0 && ( // ✅ يظهر البادج فقط لو في عناصر
-                  <span 
-                    className="position-absolute top-0 start-100 translate-middle badge rounded-pill pulse" 
-                    style={{
-                      background: 'var(--secondary)',
-                      color: 'white',
-                      fontSize: '0.75rem',
-                      fontWeight: '700',
-                      padding: '0.125rem 0.375rem'
-                    }}
-                  >
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
-            </li>
             {/* User / Auth */}
             {isAuthenticated ? (
               <>
@@ -153,6 +112,25 @@ const Navbar = memo(() => {
                 </li>
               </>
             )}
+
+            {/* Theme Toggle - Moved to end */}
+            <li className="nav-item">
+              <button 
+                className="nav-link btn btn-link theme-toggle" 
+                onClick={handleThemeToggle}
+                aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  color: 'var(--navbar-text)',
+                  padding: '0.5rem',
+                  borderRadius: '50%',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+            </li>
           </ul>
         </div>
       </div>

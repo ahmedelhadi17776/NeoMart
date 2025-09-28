@@ -93,8 +93,8 @@ export const useSwipeGesture = (onSwipeLeft, onSwipeRight, options = {}) => {
 // Hook specifically for swipe-to-delete functionality
 export const useSwipeToDelete = (onDelete, options = {}) => {
   const {
-    threshold = 50,
-    deleteThreshold = 100,
+    threshold = 40, // Reduced for easier mobile interaction
+    deleteThreshold = 80, // Reduced for easier mobile interaction
     animationDuration = 300
   } = options;
 

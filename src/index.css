@@ -241,3 +241,58 @@ html {
   color: var(--text-muted);
   opacity: 0.85;
 }
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better mobile scrolling */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Improve mobile text rendering */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Mobile-specific spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Mobile card improvements */
+  .card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Mobile button improvements */
+  .btn {
+    border-radius: 0.75rem;
+    font-weight: 500;
+  }
+
+  /* Mobile form improvements */
+  .form-control {
+    border-radius: 0.75rem;
+    font-size: 1rem;
+  }
+
+  /* Mobile navbar improvements */
+  .navbar {
+    padding: 0.75rem 0;
+  }
+
+  /* Mobile badge improvements */
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+}

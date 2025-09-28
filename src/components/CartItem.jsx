@@ -31,8 +31,8 @@ const CartItem = memo(({ item }) => {
     handleDeleteClick,
     resetState
   } = useSwipeToDelete(handleRemove, {
-    threshold: 50,
-    deleteThreshold: 100,
+    threshold: 40,
+    deleteThreshold: 80,
     showDeleteButton: true,
     animationDuration: 300
   });
@@ -140,6 +140,7 @@ const CartItem = memo(({ item }) => {
             src={item.image}
             alt={item.title}
             className="product-image"
+            style={{ pointerEvents: 'none' }}
           />
         </div>
         
@@ -166,8 +167,17 @@ const CartItem = memo(({ item }) => {
                 className="btn btn-outline-secondary btn-sm"
                 onClick={handleDecreaseQuantity}
                 disabled={item.quantity <= 1}
+                style={{ 
+                  minWidth: '40px',
+                  minHeight: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1rem',
+                  fontWeight: 'bold'
+                }}
               >
-                <i className="bi bi-dash"></i>
+                −
               </button>
               <span 
                 className="btn btn-light btn-sm px-3" 
@@ -175,7 +185,13 @@ const CartItem = memo(({ item }) => {
                   background: "var(--bg-secondary)", 
                   color: "var(--text-primary)",
                   border: "1px solid var(--border-color)",
-                  minWidth: "50px"
+                  minWidth: "50px",
+                  minHeight: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1rem',
+                  fontWeight: 'bold'
                 }}
               >
                 {item.quantity}
@@ -184,8 +200,17 @@ const CartItem = memo(({ item }) => {
                 className="btn btn-outline-secondary btn-sm"
                 onClick={handleIncreaseQuantity}
                 disabled={item.quantity >= (item.stock || Infinity)}
+                style={{ 
+                  minWidth: '40px',
+                  minHeight: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1rem',
+                  fontWeight: 'bold'
+                }}
               >
-                <i className="bi bi-plus"></i>
+                +
               </button>
             </div>
           </div>
@@ -193,9 +218,18 @@ const CartItem = memo(({ item }) => {
           <button
             className="btn btn-outline-danger btn-sm"
             onClick={handleRemove}
-            title="Remove from cart"
+            style={{
+              minWidth: '80px',
+              minHeight: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+              gap: '0.25rem'
+            }}
           >
-            <i className="bi bi-trash me-1"></i>
+            <i className="bi bi-trash"></i>
             Remove
           </button>
         </div>
