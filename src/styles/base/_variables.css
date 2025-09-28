@@ -28,6 +28,10 @@
   --shadow: rgba(0, 0, 0, 0.08);
   --shadow-hover: rgba(0, 0, 0, 0.12);
   --shadow-strong: rgba(0, 0, 0, 0.15);
+
+  /* Primary button colors - light theme (default) */
+  --primary-btn-bg: transparent;
+  --primary-btn-text: var(--primary);
 }
 
 /* Dark Theme Variables */
@@ -46,5 +50,9 @@ body.dark-theme {
   --shadow: rgba(0, 0, 0, 0.3);
   --shadow-hover: rgba(0, 217, 255, 0.2);
   --shadow-strong: rgba(0, 0, 0, 0.5);
+
+  /* Primary button colors - dark theme */
+  --primary-btn-bg: var(--primary-gradient);
+  --primary-btn-text: var(--navbar-text);
 }
 

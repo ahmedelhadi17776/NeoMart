@@ -14,40 +14,7 @@
   vertical-align: -0.125em;
 }
 
-/* React Bootstrap Icons sizing */
-svg[data-icon] {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.125em;
-}
-
-/* Consistent icon sizes for different contexts */
-.icon-sm {
-  width: 16px;
-  height: 16px;
-}
-
-.icon-md {
-  width: 20px;
-  height: 20px;
-}
-
-.icon-lg {
-  width: 24px;
-  height: 24px;
-}
-
-.icon-xl {
-  width: 32px;
-  height: 32px;
-}
-
-/* Auth form icons */
-.auth-input-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-}
+/* Removed unused icon helpers (backed up in scripts/backups/_icons.css.bak) */
 
 /* Cart and wishlist icons */
 .cart-item-card .bi,

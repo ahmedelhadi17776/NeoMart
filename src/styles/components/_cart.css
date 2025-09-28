@@ -111,49 +111,7 @@
   box-shadow: 0 4px 20px var(--shadow);
 }
 
-.checkout-summary h4 {
-  color: var(--text-primary);
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-}
-
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.summary-row:last-child {
-  border-bottom: none;
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: var(--primary);
-}
-
-.summary-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.summary-line:last-child {
-  border-bottom: none;
-  font-weight: 600;
-  font-size: 1.125rem;
-  color: var(--primary);
-}
-
-.summary-label {
-  color: var(--text-muted);
-}
-
-.summary-value {
-  color: var(--text-primary);
-}
+/* Checkout summary rules removed (backup in scripts/backups/_cart.css.bak) */
 
 /* Cart Item Swipe Animations */
 .cart-item-card {

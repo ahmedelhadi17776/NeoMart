@@ -113,9 +113,7 @@
     font-size: 1.5rem;
   }
 
-  h4 {
-    font-size: 1.25rem;
-  }
+  /* mobile h4 override removed in aggressive cleanup (backup in scripts/backups/_responsive.css.bak) */
 
   h5 {
     font-size: 1.1rem;
@@ -132,22 +130,10 @@
   }
 
   /* Mobile table improvements */
-  .table-responsive {
-    border-radius: 0.75rem;
-  }
-
-  .table {
-    font-size: 0.875rem;
-  }
+  /* mobile table styling removed in aggressive cleanup (backup in scripts/backups/_responsive.css.bak) */
 
   /* Mobile modal improvements */
-  .modal-dialog {
-    margin: 1rem;
-  }
-
-  .modal-content {
-    border-radius: 1rem;
-  }
+  
 
   /* Mobile alert improvements */
   .alert {
@@ -155,15 +141,7 @@
     font-size: 0.95rem;
   }
 
-  /* Mobile pagination improvements */
-  .pagination {
-    justify-content: center;
-  }
-
-  .page-link {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-  }
+  /* Mobile pagination improvements removed (backup in scripts/backups/_responsive.css.bak) */
 }
 
 @media (max-width: 576px) {

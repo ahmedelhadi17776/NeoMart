@@ -1,4 +1,4 @@
-.floating { animation: float 3s ease-in-out infinite; will-change: transform; }
+/* .floating removed (backup in scripts/backups/_animations.css.bak) */
 @keyframes float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -10px, 0); } }
 
 /* Floating Card Animations */
@@ -161,16 +161,7 @@
   animation: shimmer 1.6s ease-in-out infinite;
 }
 
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--bg-secondary) 25%,
-    var(--border-color) 37%,
-    var(--bg-secondary) 63%
-  );
-  background-size: 400% 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
-}
+/* .skeleton removed (backup in scripts/backups/_animations.css.bak) */
 
 /* Enhanced loading animations */
 @keyframes pulse {
@@ -237,13 +228,7 @@
 }
 
 /* Utility animation classes */
-.animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-.animate-bounce { animation: bounce 1s infinite; }
-.animate-shake { animation: shake 0.5s ease-in-out; }
-.animate-wiggle { animation: wiggle 1s ease-in-out; }
-.animate-fade-in { animation: fadeIn 0.5s ease-in-out; }
-.animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
-.animate-slide-in { animation: slideIn 0.3s ease-out; }
+/* utility animation helper classes removed (backed up in scripts/backups/_animations.css.bak) */
 
 /* Micro-interaction animations */
 @keyframes addToCart {
