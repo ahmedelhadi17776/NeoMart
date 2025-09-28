@@ -27,3 +27,11 @@ dist-ssr
 *.pdf
 flux-ecommerce-demo.html
 option-2.html
+ 
+# Ignore PurgeCSS automation outputs and backups
+scripts/purge-report-output.txt
+scripts/purge-selector-map.json
+scripts/backups/
+
+# Ignore any local export scripts or temp files
+scripts/*.bak

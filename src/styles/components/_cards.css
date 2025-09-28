@@ -29,8 +29,5 @@
   background: var(--success) !important; 
   color: white !important; 
 }
-.badge.bg-danger { 
-  background: var(--error) !important; 
-  color: white !important; 
-}
+
 

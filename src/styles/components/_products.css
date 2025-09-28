@@ -709,53 +709,8 @@
   }
 }
 
-/* Legacy Filters Bar - Kept for backward compatibility */
-.filters-bar {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
+/* Legacy Filters Bar and Featured Products Section removed (backed up in scripts/backups/) */
 
-.filters-bar .input-group {
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: 0 4px 12px var(--shadow);
-  max-width: 280px;
-}
-
-.filters-bar .input-group-text {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  border-right: none;
-}
-
-
-/* Featured Products Section */
-.featured-products-section {
-  background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(102, 126, 234, 0.05) 100%);
-  padding: 4rem 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.featured-products-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
-  z-index: 0;
-}
-
-.featured-products-section .container {
-  position: relative;
-  z-index: 1;
-}
 
 /* Section Headers */
 .section-title {
